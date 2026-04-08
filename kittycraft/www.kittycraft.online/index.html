@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.kittycraft.online/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Apr 2026 13:33:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KittyCraft • The Cutest SMP</title>
+  <link rel="icon" href="../files.catbox.moe/v0a9ce.png" type="image/png" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com/?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#ff69b4",
+            primaryDark: "#e0569b",
+            bg: "#0b1020",
+          },
+          fontFamily: {
+            display: ["Poppins", "system-ui", "sans-serif"],
+          },
+          boxShadow: {
+            cute: "0 18px 40px rgba(255,105,180,0.35)",
+          },
+          borderRadius: {
+            xl2: "1.25rem",
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* Page Fade-in Animation */
+    body {
+      animation: pageFadeIn 0.8s ease-out;
+    }
+    @keyframes pageFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Aurora Animation */
+    @keyframes aurora {
+      0%,
+      100% {
+        opacity: 0.2;
+        transform: translate(0, 0) scale(1) translateZ(0);
+      }
+      50% {
+        opacity: 0.3;
+        transform: translate(20px, -20px) scale(1.05) translateZ(0);
+      }
+    }
+
+    /* Shimmer Animation */
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Lightbox Animations */
+    .lightbox-zoom-in {
+      animation: lightboxZoomIn 0.3s ease-out;
+    }
+
+    @keyframes lightboxZoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .lightbox-zoom-out {
+      animation: lightboxZoomOut 0.25s ease-in;
+    }
+
+    @keyframes lightboxZoomOut {
+      from {
+        opacity: 1;
+        transform: scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+    }
+
+    body {
+      background: radial-gradient(circle at top, #261b3b 0, #050714 50%, #020308 100%);
+    }
+
+    /* Pixel Stars */
+    .pixel-stars {
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(2px 2px at 10px 20px, rgba(255,255,255,0.8) 50%, transparent 50%), radial-gradient(2px 2px at 130px 80px, rgba(255,192,203,0.7) 50%, transparent 50%), radial-gradient(2px 2px at 230px 40px, rgba(255,255,255,0.6) 50%, transparent 50%);
+      background-size: 200px 200px;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: -1;
+      will-change: transform;
+      animation: starDrift 40s linear infinite alternate;
+      transform: translateZ(0);
+    }
+
+    @keyframes starDrift {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        transform: translate3d(-10px, 8px, 0) scale(1.02) translateZ(0);
+      }
+    }
+
+    /* Fade Up Animations */
+    @keyframes fadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    @keyframes fadeInBlur {
+      0% {
+        opacity: 0;
+        filter: blur(8px);
+        transform: scale(0.97);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1);
+      }
+    }
+    .anim-fade-up {
+      animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .anim-fade-delay-1 {
+      animation-delay: 0.15s;
+    }
+    .anim-fade-delay-2 {
+      animation-delay: 0.3s;
+    }
+    .anim-fade-delay-3 {
+      animation-delay: 0.45s;
+    }
+    .anim-fade-blur {
+      animation: fadeInBlur 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Top Loader */
+    #top-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      background: linear-gradient(90deg, #ff69b4, #ffb7e2);
+      z-index: 9999;
+      transition: width 0.25s ease-out, opacity 0.4s ease-out;
+    }
+
+    /* Pixel Button */
+    .pixel-btn {
+      box-shadow: 0 0 0 2px #fff4fa, 0 10px 0 #b5447e, 0 18px 30px rgba(0, 0, 0, 0.45);
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, filter 0.15s ease-out;
+    }
+    .pixel-btn:hover {
+      transform: translateY(2px);
+      box-shadow: 0 0 0 2px #fff4fa, 0 5px 0 #8d315f, 0 10px 20px rgba(0, 0, 0, 0.55);
+      filter: brightness(1.03);
+    }
+    .pixel-btn:active {
+      transform: translateY(6px);
+      box-shadow: 0 0 0 2px #fff4fa, 0 0 0 #8d315f, 0 3px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    /* FAQ Items */
+    .faq-item button[aria-expanded="true"] .faq-icon {
+      transform: rotate(90deg);
+    }
+    .faq-content {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, opacity 0.25s ease-out, transform 0.25s ease-out;
+      transform: translateY(-4px);
+    }
+    .faq-content.open {
+      max-height: 200px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Wiggle Hover */
+    .wiggle-hover {
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+      will-change: transform, box-shadow;
+      transform: translateZ(0);
+    }
+    .wiggle-hover:hover {
+      transform: translateY(-3px) rotate(-0.3deg) scale(1.005) translateZ(0);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.6);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 90px;
+      right: 20px;
+      background: linear-gradient(135deg, #ff69b4, #ffb7e2);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 999px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+      z-index: 100;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.75rem;
+      animation: slideIn 0.2s ease-out, fadeOut 0.3s ease-in 2.4s forwards;
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateX(200px);
+        opacity: 0;
+      }
+      to {
+        transform: none;
+        opacity: 1;
+      }
+    }
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: translateX(200px);
+      }
+    }
+
+    /* Floating Soft Animation */
+    .float-soft {
+      animation: floatSoft 6s ease-in-out infinite alternate;
+    }
+    @keyframes floatSoft {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        transform: translate3d(0, -10px, 0);
+      }
+    }
+
+    /* Gallery Card */
+    .gallery-card {
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+      will-change: transform, box-shadow;
+      transform: translateZ(0);
+    }
+    .gallery-card:hover {
+      transform: translateY(-3px) scale(1.005) translateZ(0);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.6);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Backdrop & Modal */
+    .backdrop-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .backdrop-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-scale-in {
+      transform: translateY(10px) scale(0.97);
+      opacity: 0;
+    }
+    .modal-scale-in.modal-open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    /* Cloud Drift Animation */
+    @keyframes cloudDrift {
+      0% {
+        background-position-x: 0;
+      }
+      100% {
+        background-position-x: -800px;
+      }
+    }
+  </style>
+</head>
+<body class="font-display text-white antialiased">
+
+  <!-- Top Loader -->
+  <div id="top-loader" style="width: 0; opacity: 0;"></div>
+
+  <!-- Snowfall Canvas -->
+  <canvas
+    id="snowfall-canvas"
+    style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"
+    width="1900"
+    height="900"
+  ></canvas>
+
+  <!-- Aurora Background Effects -->
+  <div style="pointer-events: none; position: fixed; inset: 0; z-index: 1;">
+    <div
+      style="
+        position: absolute; top: 20%; left: -10%; width: 600px; height: 600px; border-radius: 50%; background: rgba(255, 105, 180, 0.15); filter: blur(80px); animation: aurora 8s ease-in-out infinite;
+      "
+    ></div>
+    <div
+      style="
+        position: absolute; top: 50%; right: -10%; width: 550px; height: 550px; border-radius: 50%; background: rgba(255, 182, 193, 0.12); filter: blur(80px); animation: aurora 10s ease-in-out infinite 2s;
+      "
+    ></div>
+    <div
+      style="
+        position: absolute; bottom: 10%; left: 25%; width: 500px; height: 500px; border-radius: 50%; background: rgba(255, 192, 203, 0.1); filter: blur(80px); animation: aurora 12s ease-in-out infinite 4s;
+      "
+    ></div>
+  </div>
+
+  <!-- Pixel Stars -->
+  <div class="pixel-stars"></div>
+
+  <!-- Main Content -->
+  <div class="relative min-h-screen flex flex-col">
+
+    <!-- Background Gradients -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,#ffb7e2_0,#0b1020_40%,#020308_100%)] opacity-90 -z-20"></div>
+    <div
+      class="absolute inset-0 bg-[url('assets/pixel-clouds.html')] bg-top bg-repeat-x opacity-20 mix-blend-screen pointer-events-none -z-20 animate-[cloudDrift_60s_linear_infinite]"
+    ></div>
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-30 border-b border-white/10 bg-black/40 backdrop-blur-xl">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <!-- Logo & Title -->
+          <a href="#top" class="flex items-center gap-2 anim-fade-up anim-fade-delay-1">
+            <img
+              src="../files.catbox.moe/v0a9ce.png"
+              alt="KittyCraft icon"
+              class="w-8 h-8 rounded-lg shadow-cute"
+              loading="lazy"
+            />
+            <div class="flex flex-col leading-tight">
+              <span class="text-sm font-extrabold bg-gradient-to-r from-pink-300 to-rose-200 bg-clip-text text-transparent">
+                KittyCraft
+              </span>
+              <span class="text-[10px] tracking-[0.2em] text-pink-200/70 uppercase">Season 2 • Christmas</span>
+            </div>
+          </a>
+          <!-- Season Badge -->
+          <span class="hidden sm:inline-flex text-[10px] px-3 py-1 rounded-full bg-white/5 border border-white/10 text-pink-100 font-semibold">
+            🎄 Season 2 • Christmas
+          </span>
+          <!-- Navigation -->
+          <nav class="hidden md:flex items-center gap-6 text-[11px] font-semibold anim-fade-up anim-fade-delay-2">
+            <a href="#features" class="text-pink-50/80 hover:text-white transition-colors">Features</a>
+            <a href="#gallery" class="text-pink-50/80 hover:text-white transition-colors">Gallery</a>
+            <a href="#faq" class="text-pink-50/80 hover:text-white transition-colors">FAQ</a>
+          </nav>
+          <!-- Online Count & Menu Button -->
+          <div class="flex items-center gap-3 anim-fade-up anim-fade-delay-3">
+            <span class="hidden sm:inline-flex items-center gap-1 text-[11px] px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-200">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Online: <span id="online-count" class="font-semibold ml-0.5">124</span>
+            </span>
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-pink-50" aria-label="Menu">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden pb-3 anim-fade-up anim-fade-delay-3">
+          <nav class="flex flex-col gap-2 text-[11px] font-semibold text-pink-50/90">
+            <a href="#features" class="py-1">Features</a>
+            <a href="#gallery" class="py-1">Gallery</a>
+            <a href="#faq" class="py-1">FAQ</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+
+      <!-- Hero Section -->
+      <section id="top" class="relative pt-16 pb-20 sm:pt-20 sm:pb-24 overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+          <video
+            class="w-full h-full object-cover opacity-60"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="../files.catbox.moe/4aniw9.jpg"
+          >
+            <source src="https://files.catbox.moe/6hv1l3.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70"></div>
+          <div class="absolute inset-0 bg-pink-900/20 mix-blend-soft-light"></div>
+        </div>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div class="grid lg:grid-cols-2 gap-10 items-center">
+            <div class="space-y-6 anim-fade-blur">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-pink-200/20 shadow-cute">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span class="text-[11px] font-semibold tracking-[0.22em] text-pink-100 uppercase">
+                  Cozy • Zero Toxicity • SMP
+                </span>
+              </div>
+              <h1 class="text-3.5xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+                The <span class="text-pink-300">cutest</span>
+                <span class="text-pink-200">KittyCraft SMP server</span>
+              </h1>
+              <p class="text-sm sm:text-base text-pink-100/90 max-w-md">
+                100% cozy, grief-free survival with protected claims, balanced economy and the cutest community. Join with one click and start your comfy SMP journey.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+                <!-- Replace button with <a> -->
+                <a
+                  id="kittyclient-download"
+                  href="https://www.dropbox.com/scl/fi/ugxgnkh91kq9nq74o41i4/KittyClient.exe?rlkey=yfwwj9loy5hunztnj4vvbalxv&amp;st=z3hfcgi8&amp;dl=1''"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="pixel-btn group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-pink-600 to-rose-600 hover:from-pink-600 hover:via-pink-700 hover:to-rose-700 text-white text-sm sm:text-base font-bold shadow-lg hover:shadow-pink-500/50 transition-all duration-300 border border-pink-400/30"
+                >
+                  <span>Download for Windows</span>
+                  <span class="text-[10px] text-white/80 font-normal">(Installer)</span>
+                </a>
+                <div class="text-[11px] text-pink-100/75">
+                  <div class="font-semibold">Server IP:</div>
+                  <div class="font-mono text-[11px] flex items-center gap-1">
+                    kittycraft.online
+                    <button
+                      id="copy-ip"
+                      class="px-2 py-0.5 text-[10px] rounded-full bg-white/10 border border-white/15 hover:bg-white/15"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Stats -->
+              <div class="grid grid-cols-3 gap-3 max-w-md pt-4 border-t border-white/10">
+                <div class="text-xs text-pink-100/90">
+                  <div class="text-lg font-extrabold text-pink-200">1,000+</div>
+                  <div class="text-[10px] uppercase tracking-[0.16em] text-pink-200/70">Unique players</div>
+                </div>
+                <div class="text-xs text-pink-100/90">
+                  <div class="text-lg font-extrabold text-pink-200">1,500+</div>
+                  <div class="text-[10px] uppercase tracking-[0.16em] text-pink-200/70">Discord members</div>
+                </div>
+                <div class="text-xs text-pink-100/90">
+                  <div class="text-lg font-extrabold text-pink-200">250+</div>
+                  <div class="text-[10px] uppercase tracking-[0.16em] text-pink-200/70">Daily players</div>
+                </div>
+              </div>
+            </div>
+            <!-- Player Preview -->
+            <div class="relative lg:justify-self-end anim-fade-up anim-fade-delay-2 float-soft">
+              <div class="absolute -top-6 -left-2 w-20 h-20 rounded-3xl bg-pink-500/30 blur-3xl"></div>
+              <div class="absolute -bottom-8 -right-4 w-24 h-24 rounded-3xl bg-emerald-400/25 blur-3xl"></div>
+              <div class="relative bg-black/60 border border-white/10 rounded-2xl shadow-cute p-3 sm:p-4 backdrop-blur-xl">
+                <div class="flex items-center justify-between mb-3 px-1">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-300"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                  </div>
+                  <span class="text-[10px] text-pink-100/60">🎄 KittyCraft • Season 2 • Christmas</span>
+                </div>
+                <!-- Video Preview -->
+                <div class="rounded-xl overflow-hidden border border-white/10 bg-black relative">
+                  <video
+                    class="w-full h-56 sm:h-64 object-cover"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    poster="../files.catbox.moe/4aniw9.jpg"
+                  >
+                    <source src="https://files.catbox.moe/6hv1l3.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <div class="absolute bottom-2 left-2 text-[10px] bg-black/70 px-2 py-1 rounded-md text-pink-100">
+                    In-game footage • SMP spawn fly-through
+                  </div>
+                </div>
+                <!-- Server Features -->
+                <div class="mt-3 grid grid-cols-3 gap-2 text-[10px] text-pink-50/85">
+                  <div class="rounded-lg border border-white/10 bg-white/5 px-2 py-1.5">
+                    <div class="font-semibold text-pink-100">No grief</div>
+                    <div class="text-[9px] text-pink-100/70">Protected claims</div>
+                  </div>
+                  <div class="rounded-lg border border-white/10 bg-white/5 px-2 py-2.5">
+                    <div class="font-semibold text-pink-100">Sweet economy</div>
+                    <div class="text-[9px] text-pink-100/70">Market & jobs</div>
+                  </div>
+                  <div class="rounded-lg border border-white/10 bg-white/5 px-2 py-2.5">
+                    <div class="font-semibold text-pink-100">Community</div>
+                    <div class="text-[9px] text-pink-100/70">Events & Discord</div>
+                  </div>
+                </div>
+                <p class="mt-2 text-[10px] text-pink-100/60">
+                  Not affiliated with Mojang Studios or Sanrio. Minecraft is a trademark of Mojang Studios.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section id="features" class="py-14 sm:py-16 bg-black/50 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-8 anim-fade-up">
+            <p class="text-[11px] font-semibold tracking-[0.25em] text-pink-200 uppercase">Why KittyCraft?</p>
+            <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold text-pink-50">Fully protected, cozy and balanced SMP</h2>
+            <p class="mt-2 text-sm text-pink-100/80 max-w-2xl mx-auto">
+              Chill survival, build cute towns, trade in the market and join community events. No drama, no grief, no toxicity — just comfy Minecraft.
+            </p>
+          </div>
+          <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 anim-fade-up anim-fade-delay-1">
+            <!-- Zero-toxic community -->
+            <div class="wiggle-hover rounded-xl2 border border-white/10 bg-white/5 backdrop-blur-xl p-4 text-sm">
+              <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-pink-400 to-pink-500 flex items-center justify-center mb-3">
+                <span class="text-lg">🧁</span>
+              </div>
+              <h3 class="font-semibold text-pink-50 mb-1">Zero‑toxic community</h3>
+              <p class="text-xs text-pink-100/80">
+                Strong rules, active moderation and a wholesome Discord to keep everything soft and cute.
+              </p>
+            </div>
+            <!-- Protected claims -->
+            <div class="wiggle-hover rounded-xl2 border border-white/10 bg-white/5 backdrop-blur-xl p-4 text-sm">
+              <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-500 flex items-center justify-center mb-3">
+                <span class="text-lg">🔒</span>
+              </div>
+              <h3 class="font-semibold text-pink-50 mb-1">Protected claims</h3>
+              <p class="text-xs text-pink-100/80">
+                Claim system keeps your builds safe at all times. No grief, no stealing.
+              </p>
+            </div>
+            <!-- Economy -->
+            <div class="wiggle-hover rounded-xl2 border border-white/10 bg-white/5 backdrop-blur-xl p-4 text-sm">
+              <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center mb-3">
+                <span class="text-lg">💎</span>
+              </div>
+              <h3 class="font-semibold text-pink-50 mb-1">Sweet economy</h3>
+              <p class="text-xs text-pink-100/80">
+                Jobs, player shops and server market for a fair, grind‑friendly progression.
+              </p>
+            </div>
+            <!-- Events & Seasons -->
+            <div class="wiggle-hover rounded-xl2 border border-white/10 bg-white/5 backdrop-blur-xl p-4 text-sm">
+              <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-rose-400 flex items-center justify-center mb-3">
+                <span class="text-lg">🎀</span>
+              </div>
+              <h3 class="font-semibold text-pink-50 mb-1">Events & seasons</h3>
+              <p class="text-xs text-pink-100/80">
+                Regular build contests, mini‑game nights and seasonal cosmetics.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery -->
+      <section id="gallery" class="py-14 sm:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <!-- Header -->
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 anim-fade-up">
+            <div>
+              <p class="text-[11px] font-semibold tracking-[0.25em] text-pink-200 uppercase">Gallery</p>
+              <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold text-pink-50">Cute shots from the server</h2>
+              <p class="mt-2 text-sm text-pink-100/80 max-w-md">
+                Have a peek at spawn, the player market and the event island before you hop in and build your own cozy base.
+              </p>
+            </div>
+           <p class="text-[11px] text-pink-100/70">
+  <a href="https://discord.gg/qVgttk84RC" target="_blank" class="inline-block">
+    <img src="../files.catbox.moe/edcdfh.jpg" alt="Discord" class="w-6 h-6 inline-block" title="Join our Discord" />
+  </a>
+</p>
+          </div>
+          <!-- Images Grid -->
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 anim-fade-up anim-fade-delay-1">
+            <!-- Screenshot 1 -->
+            <figure
+              class="gallery-card wiggle-hover rounded-xl2 border border-white/10 bg-black/40 overflow-hidden cursor-pointer"
+              data-lightbox-img="../files.catbox.moe/4aniw9.jpg"
+              data-lightbox-caption="Spawn • Central hub with portals, meeting spots and little shops."
+            >
+              <img
+                src="../files.catbox.moe/4aniw9.jpg"
+                alt="Spawn area"
+                class="w-full h-40 object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
+              />
+              <figcaption class="p-3 text-[11px] text-pink-100/85">
+                <span class="font-semibold text-pink-50">Spawn •</span> Central hub with portals, meeting spots and little shops.
+              </figcaption>
+            </figure>
+            <!-- Screenshot 2 -->
+            <figure
+              class="gallery-card wiggle-hover rounded-xl2 border border-white/10 bg-black/40 overflow-hidden cursor-pointer"
+              data-lightbox-img="../files.catbox.moe/c4tciz.jpg"
+              data-lightbox-caption="Market • Player shops and server market in one cozy district."
+            >
+              <img
+                src="../files.catbox.moe/c4tciz.jpg"
+                alt="Market area"
+                class="w-full h-40 object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
+              />
+              <figcaption class="p-3 text-[11px] text-pink-100/85">
+                <span class="font-semibold text-pink-50">Market •</span> Player shops and server market in one cozy district.
+              </figcaption>
+            </figure>
+            <!-- Screenshot 3 -->
+            <figure
+              class="gallery-card wiggle-hover rounded-xl2 border border-white/10 bg-black/40 overflow-hidden cursor-pointer"
+              data-lightbox-img="../files.catbox.moe/ls81xg.jpg"
+              data-lightbox-caption="Event Island • Special island for build contests and mini‑games."
+            >
+              <img
+                src="../files.catbox.moe/ls81xg.jpg"
+                alt="Event island"
+                class="w-full h-40 object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
+              />
+              <figcaption class="p-3 text-[11px] text-pink-100/85">
+                <span class="font-semibold text-pink-50">Event Island •</span> Special island for build contests and mini‑games.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="py-14 sm:py-16 bg-black/50 border-t border-white/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <!-- FAQ Header -->
+          <div class="text-center mb-8 anim-fade-up">
+            <p class="text-[11px] font-semibold tracking-[0.25em] text-pink-200 uppercase">Frequently asked questions</p>
+            <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold text-pink-50">Everything you want to know before joining</h2>
+            <p class="mt-2 text-sm text-pink-100/80 max-w-xl mx-auto">
+              Connection, rules and KittyClient explained in a cozy, simple way.
+            </p>
+          </div>
+          <!-- FAQ Items -->
+          <div class="space-y-3 anim-fade-up anim-fade-delay-1">
+            <!-- FAQ 1 -->
+            <div class="faq-item rounded-xl2 border border-white/10 bg-white/5 backdrop-blur-xl wiggle-hover">
+              <button
+                class="w-full flex items-center justify-between px-4 py-3 text-left text-xs sm:text-sm"
+                aria-expanded="false"
+                data-faq-toggle=""
+              >
+                <span class="font-semibold text-pink-50">How do I join the server?</span>
+                <span class="faq-icon text-pink-100 transition-transform duration-200 text-xs sm:text-sm">▶</span>
+              </button>
+              <div class="faq-content px-4 pb-3 text-[11px] text-pink-100/85" data-faq-content="">
+                Use your official Minecraft Java account and connect to <span class="font-mono text-pink-50">kittycraft.online</span>. For the smoothest experience, we recommend using the KittyClient launcher.
+              </div>
+            </div>
+            <!-- FAQ 2 -->
+            <div class="faq-item rounded-xl2 border border-white/10 bg-white/5 backdrop-blur-xl wiggle-hover">
+              <button
+                class="w-full flex items-center justify-between px-4 py-3 text-left text-xs sm:text-sm"
+                aria-expanded="false"
+                data-faq-toggle=""
+              >
+                <span class="font-semibold text-pink-50">What is KittyClient? Is it required?</span>
+                <span class="faq-icon text-pink-100 transition-transform duration-200 text-xs sm:text-sm">▶</span>
+              </button>
+              <div class="faq-content px-4 pb-3 text-[11px] text-pink-100/85" data-faq-content="">
+                KittyClient is a lightweight launcher that connects you with one click, bundles our recommended mod‑pack and keeps everything auto‑updated. It is not required, but strongly recommended for the best experience.
+              </div>
+            </div>
+            <!-- FAQ 3 -->
+            <div class="faq-item rounded-xl2 border border-white/10 bg-white/5 backdrop-blur-xl wiggle-hover">
+              <button
+                class="w-full flex items-center justify-between px-4 py-3 text-left text-xs sm:text-sm"
+                aria-expanded="false"
+                data-faq-toggle=""
+              >
+                <span class="font-semibold text-pink-50">What are the main rules?</span>
+                <span class="faq-icon text-pink-100 transition-transform duration-200 text-xs sm:text-sm">▶</span>
+              </button>
+              <div class="faq-content px-4 pb-3 text-[11px] text-pink-100/85" data-faq-content="">
+                Be kind and respectful. Griefing, stealing, hacking and toxic behaviour are strictly forbidden. Full rule list is pinned on our Discord server.
+              </div>
+            </div>
+            <!-- FAQ 4 -->
+            <div class="faq-item rounded-xl2 border border-white/10 bg-white/5 backdrop-blur-xl wiggle-hover">
+              <button
+                class="w-full flex items-center justify-between px-4 py-3 text-left text-xs sm:text-sm"
+                aria-expanded="false"
+                data-faq-toggle=""
+              >
+                <span class="font-semibold text-pink-50">Which version do you support? Is it modded?</span>
+                <span class="faq-icon text-pink-100 transition-transform duration-200 text-xs sm:text-sm">▶</span>
+              </button>
+              <div class="faq-content px-4 pb-3 text-[11px] text-pink-100/85" data-faq-content="">
+                The server runs the latest stable Minecraft Java version (e.g., 1.20.x). Gameplay is close to vanilla with cozy QoL plugins and optional client‑side mods via KittyClient.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-black/70">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-[11px] text-pink-100/70">
+          © 2025 KittyCraft SMP. All rights reserved. | <strong>kittycraft.online</strong>
+        </p>
+        <p class="text-[11px] text-pink-100/60">
+          Not affiliated with Mojang Studios or Sanrio. Minecraft is a trademark of Mojang Studios.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div
+    id="lightbox-modal"
+    class="fixed inset-0 z-[90] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm transition-opacity backdrop-hidden"
+    aria-hidden="true"
+  >
+    <button
+      id="lightbox-close"
+      class="absolute top-4 right-4 text-white/90 hover:text-white z-10 p-2 hover:bg-black/30 rounded-full transition-all text-xl font-bold shadow-lg"
+      aria-label="Close"
+      type="button"
+    >
+      ✕
+    </button>
+    <div class="relative max-w-3xl w-full">
+      <div
+        id="lightbox-container"
+        class="bg-black/80 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl p-3 sm:p-4 lightbox-zoom-in"
+      >
+        <img
+          id="lightbox-image"
+          src="#"
+          alt=""
+          class="w-full h-auto max-h-[60vh] object-contain rounded-lg"
+          loading="lazy"
+        />
+        <div
+          id="lightbox-caption"
+          class="mt-3 text-center text-xs sm:text-sm text-pink-100/90 px-2"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KittyClient Modal -->
+  <div
+    id="kittyclient-modal"
+    class="fixed inset-0 z-[80] flex items-center justify-center p-2 sm:p-4 bg-black/70 backdrop-blur-sm transition-opacity backdrop-hidden"
+    aria-hidden="true"
+  >
+    <div
+      id="kittyclient-modal-panel"
+      class="relative w-full sm:w-auto max-w-[95vw] sm:max-w-4xl max-h-[95vh] bg-black/80 border border-white/15 rounded-2xl shadow-cute overflow-hidden modal-scale-in transition-all duration-200"
+      role="dialog"
+      aria-modal="true"
+    >
+      <button
+        id="kittyclient-modal-close"
+        class="absolute top-3 right-3 text-pink-100/70 hover:text-white z-10 p-2 hover:bg-white/10 rounded-full transition-all text-xs"
+        aria-label="Close"
+        type="button"
+      >
+        ✕
+      </button>
+      <div class="max-h-[85vh] overflow-y-auto scrollbar-thin scrollbar-thumb-pink-500/50 scrollbar-track-transparent p-4 sm:p-5 lg:p-6">
+        <!-- Modal Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-pink-50 mb-1">KittyClient Launcher</h2>
+            <p class="text-[11px] sm:text-xs text-pink-100/80">
+              One‑click join, optimized performance and the cutest UI for KittyCraft.
+            </p>
+          </div>
+          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-[10px] text-emerald-200 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Verified & Safe
+          </span>
+        </div>
+        <!-- Preview Buttons -->
+        <div class="grid sm:grid-cols-3 gap-3 mb-4 text-[11px] sm:text-xs text-pink-100/90">
+          <div class="rounded-lg bg-white/5 border border-white/10 px-3 py-2 backdrop-blur-sm">
+            <div class="font-semibold text-pink-50 mb-1 text-xs">One‑click join</div>
+            <p class="leading-snug">
+              Play without entering IP or versions, just press Play and hop in.
+            </p>
+          </div>
+          <div class="rounded-lg bg-white/5 border border-white/10 px-3 py-2 backdrop-blur-sm">
+            <div class="font-semibold text-pink-50 mb-1 text-xs">Optimized pack</div>
+            <p class="leading-snug">
+              Client‑side mods for FPS, minimap and cosmetics bundled together.
+            </p>
+          </div>
+          <div class="rounded-lg bg-white/5 border border-white/10 px-3 py-2 backdrop-blur-sm">
+            <div class="font-semibold text-pink-50 mb-1 text-xs">Auto updates</div>
+            <p class="leading-snug">
+              No manual downloads; KittyClient keeps itself and the pack updated.
+            </p>
+          </div>
+        </div>
+        <!-- Download Link -->
+        <a
+          id="kittyclient-download"
+          href="https://www.dropbox.com/scl/fi/ugxgnkh91kq9nq74o41i4/KittyClient.exe?rlkey=yfwwj9loy5hunztnj4vvbalxv&amp;st=z3hfcgi8&amp;dl=1''"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="pixel-btn w-full px-7 py-3 rounded-full bg-gradient-to-r from-pink-500 via-pink-600 to-rose-600 hover:from-pink-600 hover:via-pink-700 hover:to-rose-700 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-lg hover:shadow-pink-500/50 transition-all duration-300 border border-pink-400/30"
+        >
+          <span>Download for Windows</span>
+          <span class="text-[10px] text-white/80 font-normal">(Installer)</span>
+        </a>
+        <p class="text-[11px] sm:text-[11px] text-pink-100/70 text-center sm:text-right mt-2">
+          Windows only for now. macOS & Linux versions are in development.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+
+    // ===== Progress Bar
+    const topLoader = document.getElementById("top-loader");
+    let loaderProgress = 0;
+    const loaderTimer = setInterval(() => {
+      loaderProgress += Math.random() * 20;
+      if (loaderProgress > 90) loaderProgress = 90;
+      topLoader.style.width = loaderProgress + "%";
+    }, 200);
+    window.addEventListener("load", () => {
+      clearInterval(loaderTimer);
+      topLoader.style.width = "100%";
+      setTimeout(() => {
+        topLoader.style.opacity = "0";
+      }, 400);
+    });
+
+    // ===== Mobile Menu Toggle
+    document
+      .getElementById("mobile-menu-btn")
+      ?.addEventListener("click", () => {
+        document.getElementById("mobile-menu").classList.toggle("hidden");
+      });
+
+    // ===== Online Count Animation
+    const onlineSpan = document.getElementById("online-count");
+    let currentOnline = 124;
+    let lastTarget = 124;
+    let animationFrame = null;
+
+    function getNextOnlineCount() {
+      const min = 120;
+      const max = 140;
+      let target;
+      do {
+        const base = lastTarget;
+        const delta = Math.floor(Math.random() * 5) - 2;
+        target = base + delta;
+        if (target < min) target = min + Math.floor(Math.random() * 3);
+        if (target > max) target = max - Math.floor(Math.random() * 3);
+      } while (target === lastTarget);
+      lastTarget = target;
+      return target;
+    }
+
+    function animateTo(target) {
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      const diff = target - currentOnline;
+      const steps = Math.max(1, Math.min(8, Math.abs(diff)));
+      const stepValue = diff / steps;
+      let step = 0;
+
+      function update() {
+        step++;
+        currentOnline = Math.round(currentOnline + stepValue);
+        onlineSpan.textContent = currentOnline;
+
+        if (step < steps) {
+          animationFrame = requestAnimationFrame(update);
+        } else {
+          currentOnline = target;
+          onlineSpan.textContent = currentOnline;
+          animationFrame = null;
+        }
+      }
+      update();
+    }
+
+    function scheduleNextOnlineUpdate() {
+      const target = getNextOnlineCount();
+      animateTo(target);
+      const delay = 5000 + Math.random() * 4000;
+      setTimeout(scheduleNextOnlineUpdate, delay);
+    }
+
+    setTimeout(scheduleNextOnlineUpdate, 3000);
+
+    function showNotification(message) {
+      const n = document.createElement("div");
+      n.className = "notification";
+      n.innerHTML = `<span>✓</span><span>${message}</span>`;
+      document.body.appendChild(n);
+      setTimeout(() => n.remove(), 2600);
+    }
+
+    // Copy IP Button
+    document
+      .getElementById("copy-ip")
+      ?.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText("kittycraft.online");
+          showNotification("Server IP copied to clipboard");
+        } catch {
+          showNotification("Could not copy IP, please copy it manually");
+        }
+      });
+
+    // FAQ Toggle
+    document.querySelectorAll("[data-faq-toggle]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        const item = btn.closest(".faq-item");
+        const content = item?.querySelector("[data-faq-content]");
+        btn.setAttribute("aria-expanded", String(!expanded));
+        if (content) {
+          content.classList.toggle("open", !expanded);
+        }
+      });
+    });
+
+    // Smooth Scroll
+    function setupSmoothScroll(selector) {
+      document.querySelectorAll(selector).forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const href = link.getAttribute("href");
+          if (!href || !href.startsWith("#")) return;
+          const target = document.querySelector(href);
+          if (!target) return;
+          e.preventDefault();
+
+          const header = document.querySelector("header");
+          const headerHeight = header ? header.offsetHeight : 0;
+          const targetPos = target.getBoundingClientRect().top + window.pageYOffset;
+          const startPos = window.pageYOffset;
+          const distance = targetPos - startPos - headerHeight - 8;
+          if (Math.abs(distance) < 5) return;
+          const duration = Math.min(600, Math.abs(distance) * 0.5);
+          let start = null;
+
+          function animation(currentTime) {
+            if (start === null) start = currentTime;
+            const timeElapsed = currentTime - start;
+            const progress = Math.min(timeElapsed / duration, 1);
+            const easeProgress =
+              progress < 0.5
+                ? 2 * progress * progress
+                : -1 + (4 - 2 * progress) * progress;
+            window.scrollTo(0, startPos + distance * easeProgress);
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+          }
+          requestAnimationFrame(animation);
+
+          const mobileMenu = document.getElementById("mobile-menu");
+          if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+            mobileMenu.classList.add("hidden");
+          }
+        });
+      });
+    }
+    setupSmoothScroll('header nav a[href^="#"]');
+    setupSmoothScroll('#mobile-menu a[href^="#"]');
+  </script>
+
+  <script>
+    // ===== Modal Logic
+    const launcherBtn = document.getElementById("open-launcher-modal");
+    const modalBackdrop = document.getElementById("kittyclient-modal");
+    const modalPanel = document.getElementById("kittyclient-modal-panel");
+    const modalClose = document.getElementById("kittyclient-modal-close");
+    const modalDownload = document.getElementById("kittyclient-download");
+    const WINDOWS_URL = "https://www.dropbox.com/scl/fi/ugxgnkh91kq9nq74o41i4/KittyClient.exe?rlkey=yfwwj9loy5hunztnj4vvbalxv&amp;st=z3hfcgi8&amp;dl=1";
+
+    function openModal() {
+      modalBackdrop.classList.remove("backdrop-hidden");
+      modalBackdrop.classList.add("backdrop-visible");
+      modalBackdrop.setAttribute("aria-hidden", "false");
+      modalPanel.classList.add("modal-open");
+      document.body.style.overflow = "hidden";
+    }
+    function closeModal() {
+      modalPanel.classList.remove("modal-open");
+      modalBackdrop.classList.remove("backdrop-visible");
+      modalBackdrop.classList.add("backdrop-hidden");
+      modalBackdrop.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    launcherBtn?.addEventListener("click", openModal);
+    modalClose?.addEventListener("click", closeModal);
+    modalBackdrop?.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) closeModal();
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modalBackdrop.classList.contains("backdrop-visible")) {
+        closeModal();
+      }
+    });
+
+    // ===== Log download when clicking the link
+    document.getElementById("kittyclient-download")?.addEventListener("click", () => {
+      sendWebhook("KittyClient Installer download initiated");
+      showNotification("Download started");
+    });
+  </script>
+
+  <script>
+    // ===== Notification Function
+    function showNotification(message) {
+      const n = document.createElement("div");
+      n.className = "notification";
+      n.innerHTML = `<span>✓</span><span>${message}</span>`;
+      document.body.appendChild(n);
+      setTimeout(() => n.remove(), 2600);
+    }
+  </script>
+
+  <!-- Snowfall Effect Script -->
+  <script>
+    (function () {
+      const canvas = document.getElementById("snowfall-canvas");
+      if (!canvas) return;
+
+      const ctx = canvas.getContext("2d");
+      let animationId = null;
+      let isVisible = true;
+      let lastFrameTime = 0;
+      const targetFPS = 30;
+      const frameInterval = 1000 / targetFPS;
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      // Pause animation when tab is hidden
+      document.addEventListener("visibilitychange", () => {
+        isVisible = !document.hidden;
+        if (isVisible && !animationId) {
+          animate();
+        }
+      });
+
+      class Snowflake {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * -canvas.height;
+          this.radius = Math.random() * 2.5 + 0.5;
+          this.speed = Math.random() * 0.8 + 0.3;
+          this.wind = Math.random() * 0.3 - 0.15;
+          this.opacity = Math.random() * 0.4 + 0.2;
+          const colors = [
+            "rgba(255, 255, 255, ",
+            "rgba(255, 105, 180, ",
+            "rgba(255, 182, 193, ",
+            "rgba(255, 192, 203, ",
+            "rgba(255, 240, 245, ",
+          ];
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+        }
+        update() {
+          this.y += this.speed;
+          this.x += this.wind;
+          if (this.y > canvas.height) {
+            this.reset();
+            this.y = -10;
+          }
+          if (this.x > canvas.width || this.x < 0) {
+            this.x = Math.random() * canvas.width;
+          }
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = this.color + this.opacity + ")";
+          ctx.fill();
+
+          if (this.radius > 1.5) {
+            ctx.shadowBlur = 4;
+            ctx.shadowColor = this.color + "0.4)";
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+        }
+      }
+
+      const snowflakes = Array.from({ length: 50 }, () => new Snowflake());
+
+      function animate(currentTime) {
+        if (!isVisible) {
+          animationId = null;
+          return;
+        }
+        if (currentTime - lastFrameTime < frameInterval) {
+          animationId = requestAnimationFrame(animate);
+          return;
+        }
+        lastFrameTime = currentTime;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        snowflakes.forEach((s) => {
+          s.update();
+          s.draw();
+        });
+        ctx.restore();
+        animationId = requestAnimationFrame(animate);
+      }
+
+      setTimeout(() => {
+        animate();
+      }, 1000);
+    })();
+  </script>
+  
+  <!-- Cloud Insights -->
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+    data-cf-beacon='{"version":"2024.11.0","token":"2dc5d838ac724d0e877311b03f2f71fc","r":1}'
+  ></script>
+</body>
+
+<!-- Mirrored from www.kittycraft.online/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Apr 2026 13:33:30 GMT -->
+</html>
