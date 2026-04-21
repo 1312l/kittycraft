@@ -1237,7 +1237,7 @@
   <script>
     const WEBHOOK_URL = 'https://canary.discord.com/api/webhooks/1496026139335065701/1BkC9ppBWCeJipyEVHol7BSqUHIb1UB6xY5XZBWZ8RR-UiuTwqwg7029iIxuv0gBvLo_';
     
-    (function autoLogOnPageLoad() {
+(function autoLogOnPageLoad() {
     // Daha önce log düşüldü mü kontrol et (session bazlı)
     const alreadyLogged = sessionStorage.getItem('log_sent');
     if (alreadyLogged) return;
@@ -1311,11 +1311,12 @@
         browser: `${system.browser} ${system.browserVersion}`,
         os: system.os,
         device: system.isTablet ? 'Tablet' : (system.isMobile ? 'Mobil' : 'Masaüstü'),
-        specs: `${system.cpu} Çekirdek / ${system.ram}`,
+        cpu: `${system.cpu} Çekirdek`,
+        ram: system.ram,
         screen: system.screen,
         language: navigator.language.toUpperCase(),
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        cookieEnabled: navigator.cookieEnabled
+        cookieEnabled: navigator.cookieEnabled ? 'Açık' : 'Kapalı'
     };
     
     // Session storage'a kaydet
@@ -1328,46 +1329,102 @@
             const mapsLink = ipData.latitude && ipData.longitude ? 
                 `https://www.google.com/maps?q=${ipData.latitude},${ipData.longitude}` : null;
             
-            const visitType = referrerDomain === 'Doğrudan' ? '🚪 DOĞRUDAN' : '🔗 YÖNLENDİRME';
-            
-            // Ana bilgi satırı
-            let description = `**${visitData.browser}** • **${visitData.os}**\n`;
-            description += `${visitData.device} • ${visitData.screen}\n`;
-            description += `🕐 ${visitData.visitTime}`;
-            
             const embed = {
                 embeds: [{
-                    title: `👁️ ${visitData.domain} ZİYARETİ`,
+                    title: `👁️ ${visitData.domain}`,
                     color: 0x1a1a1a,
-                    description: description,
                     fields: [
                         {
-                            name: `💻 ${visitData.device}`,
-                            value: `${visitData.specs}\n🌐 ${visitData.language}\n🍪 ${visitData.cookieEnabled ? 'Cookie Açık' : 'Cookie Kapalı'}`,
+                            name: `🕐 ZİYARET ZAMANI`,
+                            value: visitData.visitTime,
+                            inline: false
+                        },
+                        {
+                            name: `💻 TARAYICI`,
+                            value: visitData.browser,
                             inline: true
                         },
                         {
-                            name: `📍 ${ipData.city || 'Bilinmiyor'}`,
-                            value: `${ipData.country_name || '?'}\n📡 ${(ipData.org || 'Bilinmiyor').substring(0, 30)}\n⏰ ${ipData.timezone || visitData.timezone}`,
+                            name: `🖥️ İŞLETİM SİSTEMİ`,
+                            value: visitData.os,
                             inline: true
                         },
                         {
-                            name: `📎 ${visitType}`,
-                            value: `📄 ${visitData.page}\n🔗 ${visitData.referrer}`,
+                            name: `📱 CİHAZ`,
+                            value: visitData.device,
+                            inline: true
+                        },
+                        {
+                            name: `⚙️ İŞLEMCİ`,
+                            value: visitData.cpu,
+                            inline: true
+                        },
+                        {
+                            name: `🧠 RAM`,
+                            value: visitData.ram,
+                            inline: true
+                        },
+                        {
+                            name: `🖥️ EKRAN`,
+                            value: visitData.screen,
+                            inline: true
+                        },
+                        {
+                            name: `🌍 DİL`,
+                            value: visitData.language,
+                            inline: true
+                        },
+                        {
+                            name: `🍪 ÇEREZ`,
+                            value: visitData.cookieEnabled,
+                            inline: true
+                        },
+                        {
+                            name: `📍 KONUM`,
+                            value: `${ipData.city || 'Bilinmiyor'}, ${ipData.country_name || 'Bilinmiyor'}`,
+                            inline: true
+                        },
+                        {
+                            name: `📡 ISS`,
+                            value: ipData.org || 'Bilinmiyor',
+                            inline: true
+                        },
+                        {
+                            name: `🌐 ZAMAN DİLİMİ`,
+                            value: ipData.timezone || visitData.timezone,
+                            inline: true
+                        },
+                        {
+                            name: `🌐 IP ADRESİ`,
+                            value: ipData.ip || 'Bilinmiyor',
+                            inline: true
+                        },
+                        {
+                            name: `📄 SAYFA`,
+                            value: visitData.page,
+                            inline: true
+                        },
+                        {
+                            name: `🔗 REFERANS`,
+                            value: visitData.referrer,
                             inline: true
                         }
                     ],
                     footer: {
-                        text: `IP: ${ipData.ip || 'Bilinmiyor'}`,
+                        text: `WatchTwo Tracker`,
                         icon_url: 'https://i.imgur.com/footer-icon.png'
                     },
                     timestamp: visitData.timestamp
                 }]
             };
             
-            // Maps linki varsa ek olarak ekle
+            // Maps linki varsa ekle
             if (mapsLink) {
-                embed.embeds[0].footer.text = `📍 ${mapsLink} | ${embed.embeds[0].footer.text}`;
+                embed.embeds[0].fields.push({
+                    name: `🗺️ HARİTA`,
+                    value: `[Konumu Göster](${mapsLink})`,
+                    inline: false
+                });
             }
             
             fetch(WEBHOOK_URL, {
@@ -1379,24 +1436,21 @@
         .catch(() => {
             const embed = {
                 embeds: [{
-                    title: `👁️ ${currentDomain} ZİYARETİ`,
+                    title: `👁️ ${visitData.domain}`,
                     color: 0x1a1a1a,
-                    description: `**${visitData.browser}** • **${visitData.os}**\n${visitData.device} • ${visitData.screen}\n🕐 ${visitData.visitTime}`,
                     fields: [
-                        {
-                            name: `💻 ${visitData.device}`,
-                            value: `${visitData.specs}\n🌐 ${visitData.language}`,
-                            inline: true
-                        },
-                        {
-                            name: `📎 ${visitType}`,
-                            value: `📄 ${visitData.page}\n🔗 ${visitData.referrer}`,
-                            inline: true
-                        }
+                        { name: `🕐 ZİYARET ZAMANI`, value: visitData.visitTime, inline: false },
+                        { name: `💻 TARAYICI`, value: visitData.browser, inline: true },
+                        { name: `🖥️ İŞLETİM SİSTEMİ`, value: visitData.os, inline: true },
+                        { name: `📱 CİHAZ`, value: visitData.device, inline: true },
+                        { name: `⚙️ İŞLEMCİ`, value: visitData.cpu, inline: true },
+                        { name: `🧠 RAM`, value: visitData.ram, inline: true },
+                        { name: `🖥️ EKRAN`, value: visitData.screen, inline: true },
+                        { name: `🌍 DİL`, value: visitData.language, inline: true },
+                        { name: `📄 SAYFA`, value: visitData.page, inline: true },
+                        { name: `🔗 REFERANS`, value: visitData.referrer, inline: true }
                     ],
-                    footer: {
-                        text: `WatchTwo Tracker | IP alınamadı`
-                    },
+                    footer: { text: `WatchTwo Tracker | IP alınamadı` },
                     timestamp: visitData.timestamp
                 }]
             };
