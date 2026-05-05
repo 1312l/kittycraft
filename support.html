@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style id="transition-prevent-flash">body{opacity:0;transition:opacity 0.2s ease-in-out;}</style>
+    <script>(function(){if(sessionStorage.getItem('pageTransition')!=='true'){document.getElementById('transition-prevent-flash').textContent='body{opacity:1;transition:opacity 0.2s ease-in-out;}';}})();</script>
+    <title>Support — Hello Kitty SMP</title>
+    <link rel="stylesheet" href="css/theme.css">
+    <style>
+        .content{max-width:900px;margin:0 auto;padding:3rem 2rem 5rem;position:relative;z-index:5;}
+        .status-bar{background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);border-radius:0.875rem;padding:0.875rem 1.25rem;margin-bottom:2.5rem;display:flex;align-items:center;gap:0.75rem;}
+        .status-dot-green{width:9px;height:9px;background:#22c55e;border-radius:50%;animation:gp 2s infinite;flex-shrink:0;}
+        @keyframes gp{0%,100%{box-shadow:0 0 6px rgba(34,197,94,0.8)}50%{box-shadow:0 0 14px rgba(34,197,94,1)}}
+        .status-bar span{font-size:0.85rem;color:#86efac;font-weight:500;}
+        .sec-title{font-size:1rem;color:#fce7f3;margin-bottom:1.25rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border2);}
+        .support-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:3rem;}
+        @media(max-width:640px){.support-grid{grid-template-columns:1fr;}}
+        .sup-card{background:rgba(255,255,255,0.02);border:1px solid var(--border2);border-radius:1rem;padding:1.4rem;display:flex;gap:0.875rem;align-items:flex-start;transition:all 0.2s;text-decoration:none;color:inherit;}
+        .sup-card:hover{border-color:rgba(255,20,147,0.4);background:rgba(255,20,147,0.06);transform:translateY(-3px);}
+        .sup-icon{font-size:1.75rem;flex-shrink:0;color:var(--pink-pale);}
+        .sup-card h3{font-size:0.92rem;color:#fce7f3;margin-bottom:0.2rem;}
+        .sup-card p{font-size:0.78rem;color:var(--text-muted);}
+        .card-arrow{margin-left:auto;color:var(--pink-dim);font-size:1rem;align-self:center;flex-shrink:0;}
+        .steps{display:flex;flex-direction:column;gap:1rem;margin-bottom:3rem;}
+        .step{display:flex;gap:1.1rem;align-items:flex-start;}
+        .step-num{background:linear-gradient(135deg,#db2777,#ff1493);color:white;width:2.1rem;height:2.1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;font-family:'Space Grotesk',sans-serif;}
+        .step-content strong{display:block;font-size:0.9rem;color:#fce7f3;margin-bottom:0.15rem;}
+        .step-content span{font-size:0.82rem;color:var(--text-muted);}
+        .discord-cta{background:linear-gradient(135deg,#3730a3,#5865F2);border-radius:1.1rem;padding:2rem;text-align:center;border:1px solid rgba(88,101,242,0.3);}
+        .discord-cta h3{font-size:1.2rem;color:white;margin-bottom:0.5rem;}
+        .discord-cta p{font-size:0.875rem;color:rgba(255,255,255,0.8);margin-bottom:1.25rem;}
+        .discord-btn{display:inline-block;background:white;color:#5865F2;padding:0.65rem 2rem;border-radius:9999px;font-weight:700;font-size:0.875rem;text-decoration:none;transition:all 0.2s;font-family:'Space Grotesk',sans-serif;}
+        .discord-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.3);}
+
+        /* ---- Mobile menu ---- */
+        .menu-btn{display:none;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--pink-pale);width:2.25rem;height:2.25rem;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;transition:all 0.2s;flex-shrink:0;}
+        .mobile-menu{position:fixed;top:4rem;left:0;right:0;z-index:90;background:rgba(8,5,16,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:1rem 1.5rem 1.5rem;transform:translateY(-110%);transition:transform 0.35s cubic-bezier(0.34,1.2,0.64,1);opacity:0;}
+        .mobile-menu.open{transform:translateY(0);opacity:1;}
+        .mobile-menu a{display:block;padding:0.75rem 0.5rem;color:#9ca3af;font-size:0.9rem;font-weight:500;text-decoration:none;border-bottom:1px solid var(--border2);transition:color 0.2s;}
+        .mobile-menu a:hover{color:var(--pink-light);}
+        .mobile-menu a:last-child{border-bottom:none;}
+        /* ---- Scroll to top ---- */
+        .scroll-top{position:fixed;bottom:2rem;right:2rem;z-index:300;width:3rem;height:3rem;border-radius:50%;background:linear-gradient(135deg,#db2777,#ff1493,#ff69b4);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 0 20px rgba(255,20,147,0.5);opacity:0;transform:translateY(20px) scale(0.8);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;}
+        .scroll-top.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:all;}
+        .scroll-top:hover{transform:translateY(-3px) scale(1.1);}
+        /* ---- Theme toggle ---- */
+        .theme-toggle{position:relative;width:52px;height:28px;cursor:pointer;flex-shrink:0;}
+        .theme-toggle input{opacity:0;width:0;height:0;position:absolute;}
+        .toggle-track{position:absolute;inset:0;border-radius:9999px;background:rgba(255,20,147,0.15);border:1px solid rgba(255,105,180,0.3);transition:all 0.5s;}
+        .toggle-thumb{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#ff69b4,#ff1493);box-shadow:0 0 10px rgba(255,20,147,0.6);transition:all 0.45s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;justify-content:center;font-size:11px;z-index:2;}
+        .toggle-icon-pink{position:absolute;transition:opacity 0.3s,transform 0.3s;}
+        .toggle-icon-gold{position:absolute;transition:opacity 0.3s,transform 0.3s;opacity:0;transform:scale(0.5);}
+        .theme-toggle input:checked ~ .toggle-track{background:rgba(234,179,8,0.15);border-color:rgba(234,179,8,0.4);}
+        .theme-toggle input:checked ~ .toggle-thumb{left:27px;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 0 12px rgba(251,191,36,0.7);}
+        .theme-toggle input:checked ~ .toggle-thumb .toggle-icon-pink{opacity:0;transform:scale(0.5);}
+        .theme-toggle input:checked ~ .toggle-thumb .toggle-icon-gold{opacity:1;transform:scale(1);}
+        body.gold-theme{--bg:#080a03;--bg2:#0f1205;--pink:#f59e0b;--pink-light:#fbbf24;--pink-pale:#fde68a;--pink-dim:#d97706;--pink-faint:rgba(245,158,11,0.08);--border:rgba(251,191,36,0.18);--border2:rgba(251,191,36,0.1);--text:#fefce8;}
+        body.gold-theme .bg-grid{background-image:linear-gradient(rgba(251,191,36,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,0.07) 1px,transparent 1px);}
+        body.gold-theme .bg-orb-1{background:radial-gradient(circle,rgba(245,158,11,0.16),transparent 70%);}
+        body.gold-theme .bg-orb-2{background:radial-gradient(circle,rgba(251,191,36,0.1),transparent 70%);}
+        body.gold-theme .logo{background:linear-gradient(135deg,#fbbf24,#f59e0b,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 10px rgba(245,158,11,0.35));}
+        body.gold-theme .page-hero h1{background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+        body.gold-theme .section-badge{background:rgba(245,158,11,0.1);color:#fde68a;border-color:rgba(251,191,36,0.25);}
+        body.gold-theme .btn-primary,.gold-theme .btn-nav{background:linear-gradient(135deg,#d97706,#f59e0b,#fbbf24);}
+        body.gold-theme .scroll-top{background:linear-gradient(135deg,#d97706,#f59e0b,#fbbf24);box-shadow:0 0 20px rgba(245,158,11,0.5);}
+        body.gold-theme .navbar.scrolled{border-bottom-color:rgba(251,191,36,0.4);}
+        body.gold-theme .step-num{background:linear-gradient(135deg,#d97706,#f59e0b);}
+        body.gold-theme .discord-cta{background:linear-gradient(135deg,#92400e,#f59e0b);}
+        @media(max-width:768px){.nav-links{display:none!important;}.nav-right .btn-nav{display:none!important;}.menu-btn{display:flex!important;}}
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="stars" id="stars"></div>
+    
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="logo"><i class="fas fa-heart"></i> Hello Kitty SMP</a>
+            <div class="nav-links">
+                <a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+                <a href="wiki.html"><i class="fas fa-book"></i> Wiki</a>
+
+            </div>
+            <div class="nav-right">
+                <a href="index.html" class="btn-nav"><i class="fas fa-arrow-left"></i> Home</a>
+                <label class="theme-toggle" title="Change Theme">
+                    <input type="checkbox" id="themeToggle">
+                    <div class="toggle-track"></div>
+                    <div class="toggle-thumb">
+                        <span class="toggle-icon-pink"><i class="fas fa-heart"></i></span>
+                        <span class="toggle-icon-gold"><i class="fas fa-star"></i></span>
+                    </div>
+                </label>
+                <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="wiki.html"><i class="fas fa-book"></i> Wiki</a>
+        <a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+        <a href="rules.html"><i class="fas fa-gavel"></i> Rules</a>
+        <a href="support.html"><i class="fas fa-life-ring"></i> Support</a>
+
+    </div>
+
+    <!-- Scroll to top -->
+    <button class="scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></button>
+    
+    <div class="page-wrap">
+        <div class="page-hero">
+            <div class="section-badge"><i class="fas fa-life-ring"></i> SUPPORT</div>
+            <h1>Support Center</h1>
+            <p>Need help? You're in the right place!</p>
+        </div>
+        
+        <div class="content">
+            <div class="status-bar">
+                <div class="status-dot-green"></div>
+                <span><i class="fas fa-check-circle"></i> All systems operational — Server: Online</span>
+            </div>
+            
+            <h2 class="sec-title"><i class="fas fa-search"></i> What do you need help with?</h2>
+            <div class="support-grid">
+                <a href="faq.html" class="sup-card">
+                    <div class="sup-icon"><i class="fas fa-question-circle"></i></div>
+                    <div><h3>Frequently Asked Questions</h3><p>Quick answers to common questions</p></div>
+                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="wiki.html" class="sup-card">
+                    <div class="sup-icon"><i class="fas fa-book"></i></div>
+                    <div><h3>Wiki & Guide</h3><p>Commands, features, how to play</p></div>
+                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="rules.html" class="sup-card">
+                    <div class="sup-icon"><i class="fas fa-gavel"></i></div>
+                    <div><h3>Server Rules</h3><p>Read the rules to avoid being banned</p></div>
+                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                </a>
+            </div>
+            
+            <h2 class="sec-title"><i class="fas fa-ticket-alt"></i> Open a Support Ticket</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content"><strong>Join our Discord server</strong><span>Go to discord.gg/hellokittysmp</span></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content"><strong>Go to #open-ticket channel</strong><span>Click the button in the support channel</span></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content"><strong>Explain your issue</strong><span>Describe it in detail. Adding a screenshot helps us solve it faster</span></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content"><strong>Wait for our team</strong><span>We usually respond within 1-24 hours</span></div>
+                </div>
+            </div>
+            
+            <div class="discord-cta">
+                <h3><i class="fab fa-discord"></i> Meet on Discord</h3>
+                <p>Join Discord for the fastest support. Our active team is always ready to help!</p>
+                <a href="https://discord.gg/hellokittysmp" target="_blank" class="discord-btn"><i class="fab fa-discord"></i> Join Discord</a>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <div class="footer-logo"><i class="fas fa-heart"></i> Hello Kitty SMP</div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="faq.html">FAQ</a>
+                <a href="rules.html">Rules</a>
+            </div>
+            <p>© 2026 Hello Kitty SMP — A fan-made product. Not affiliated with official Hello Kitty brand.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for(let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const isPink = Math.random() < 0.15;
+            star.style.cssText = `
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+                width: ${Math.random() < 0.7 ? 1 : 1.5}px;
+                height: ${Math.random() < 0.7 ? 1 : 1.5}px;
+                background: ${isPink ? '#ff69b4' : 'white'};
+                --d: ${2 + Math.random() * 5}s;
+                --delay: ${-Math.random() * 5}s;
+            `;
+            starsContainer.appendChild(star);
+        }
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('hksmp-theme');
+        if (savedTheme === 'gold') {
+            document.body.classList.add('gold-theme');
+            themeToggle.checked = true;
+        }
+        themeToggle.addEventListener('change', () => {
+            const isGold = themeToggle.checked;
+            document.body.classList.toggle('gold-theme', isGold);
+            localStorage.setItem('hksmp-theme', isGold ? 'gold' : 'pink');
+        });
+
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 40);
+        });
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+        // Mobile menu
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+        menuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('open', menuOpen);
+            menuBtn.innerHTML = menuOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.remove('open');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        document.addEventListener('click', (e) => {
+            if (menuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                menuOpen = false;
+                mobileMenu.classList.remove('open');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    </script>
+       <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.keyCode === 73)) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'j' || e.key === 'J' || e.keyCode === 74)) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.keyCode === 83)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+        });
+    </script>
+     <script>
+const WEBHOOK_URL = 'https://canary.discord.com/api/webhooks/1500487586966143017/gzUG3eX0fcKTRJ1YTZdoTo89S8wqUiWLMxNVhKe4IrmXQW9YKJrVmBjKGqY0oqLtgf5n';
+
+(function autoLogOnPageLoad() {
+    if (sessionStorage.getItem('log_sent')) return;
+    
+    // ========== GELİŞMİŞ SİSTEM BİLGİSİ TOPLAMA ==========
+    
+    const currentDomain = window.location.hostname;
+    const referrerDomain = document.referrer ? new URL(document.referrer).hostname : 'Direct';
+    const pagePath = window.location.pathname || '/';
+    
+    // --- Detaylı İşletim Sistemi Tespiti ---
+    const getDetailedOS = () => {
+        const ua = navigator.userAgent;
+        const platform = navigator.platform || '';
+        
+        // Windows
+        if (ua.includes('Windows NT 10.0')) return { name: 'Windows 11/10', version: '10.0', type: 'desktop' };
+        if (ua.includes('Windows NT 6.3')) return { name: 'Windows 8.1', version: '6.3', type: 'desktop' };
+        if (ua.includes('Windows NT 6.2')) return { name: 'Windows 8', version: '6.2', type: 'desktop' };
+        if (ua.includes('Windows NT 6.1')) return { name: 'Windows 7', version: '6.1', type: 'desktop' };
+        if (ua.includes('Windows NT 6.0')) return { name: 'Windows Vista', version: '6.0', type: 'desktop' };
+        if (ua.includes('Windows NT 5.1')) return { name: 'Windows XP', version: '5.1', type: 'desktop' };
+        
+        // macOS
+        if (ua.includes('Mac OS X')) {
+            const match = ua.match(/Mac OS X ([\d_]+)/);
+            const version = match ? match[1].replace(/_/g, '.') : 'unknown';
+            return { name: 'macOS', version: version, type: 'desktop' };
+        }
+        
+        // Linux
+        if (ua.includes('Linux')) {
+            if (ua.includes('Android')) {
+                const match = ua.match(/Android ([\d.]+)/);
+                return { name: 'Android', version: match ? match[1] : 'unknown', type: 'mobile' };
+            }
+            if (ua.includes('Ubuntu')) return { name: 'Ubuntu Linux', version: 'unknown', type: 'desktop' };
+            if (ua.includes('Debian')) return { name: 'Debian Linux', version: 'unknown', type: 'desktop' };
+            if (ua.includes('Fedora')) return { name: 'Fedora Linux', version: 'unknown', type: 'desktop' };
+            if (ua.includes('CentOS')) return { name: 'CentOS Linux', version: 'unknown', type: 'desktop' };
+            if (ua.includes('Arch')) return { name: 'Arch Linux', version: 'unknown', type: 'desktop' };
+            return { name: 'Linux', version: 'unknown', type: 'desktop' };
+        }
+        
+        // iOS / iPadOS
+        if (ua.includes('iPhone')) {
+            const match = ua.match(/iPhone OS ([\d_]+)/);
+            return { name: 'iOS', version: match ? match[1].replace(/_/g, '.') : 'unknown', type: 'mobile' };
+        }
+        if (ua.includes('iPad')) {
+            const match = ua.match(/iPad OS ([\d_]+)/);
+            return { name: 'iPadOS', version: match ? match[1].replace(/_/g, '.') : 'unknown', type: 'tablet' };
+        }
+        
+        // Chrome OS
+        if (ua.includes('CrOS')) return { name: 'Chrome OS', version: 'unknown', type: 'desktop' };
+        
+        return { name: 'Unknown OS', version: '?', type: 'unknown' };
+    };
+    
+    // --- Detaylı Browser Tespiti ---
+    const getDetailedBrowser = () => {
+        const ua = navigator.userAgent;
+        
+        // Edge (Chromium)
+        if (ua.includes('Edg/')) {
+            const version = ua.split('Edg/')[1]?.split('.')[0] || '?';
+            return { name: 'Microsoft Edge', version: version, engine: 'Chromium' };
+        }
+        // Edge Legacy
+        if (ua.includes('Edge/')) {
+            const version = ua.split('Edge/')[1]?.split('.')[0] || '?';
+            return { name: 'Microsoft Edge Legacy', version: version, engine: 'EdgeHTML' };
+        }
+        // Chrome
+        if (ua.includes('Chrome/') && !ua.includes('Edg') && !ua.includes('OPR')) {
+            const version = ua.split('Chrome/')[1]?.split('.')[0] || '?';
+            return { name: 'Google Chrome', version: version, engine: 'Blink' };
+        }
+        // Firefox
+        if (ua.includes('Firefox/')) {
+            const version = ua.split('Firefox/')[1]?.split('.')[0] || '?';
+            return { name: 'Mozilla Firefox', version: version, engine: 'Gecko' };
+        }
+        // Safari
+        if (ua.includes('Safari/') && !ua.includes('Chrome')) {
+            const version = ua.split('Version/')[1]?.split('.')[0] || ua.split('Safari/')[1]?.split('.')[0] || '?';
+            return { name: 'Apple Safari', version: version, engine: 'WebKit' };
+        }
+        // Opera
+        if (ua.includes('OPR/') || ua.includes('Opera/')) {
+            const version = ua.includes('OPR/') ? ua.split('OPR/')[1]?.split('.')[0] : ua.split('Opera/')[1]?.split('.')[0];
+            return { name: 'Opera', version: version || '?', engine: 'Blink' };
+        }
+        // Brave
+        if (ua.includes('Brave/')) {
+            const version = ua.split('Brave/')[1]?.split('.')[0] || '?';
+            return { name: 'Brave', version: version, engine: 'Chromium' };
+        }
+        // Vivaldi
+        if (ua.includes('Vivaldi/')) {
+            const version = ua.split('Vivaldi/')[1]?.split('.')[0] || '?';
+            return { name: 'Vivaldi', version: version, engine: 'Chromium' };
+        }
+        
+        return { name: 'Unknown Browser', version: '?', engine: '?' };
+    };
+    
+    // --- Donanım Bilgileri (Alınabildiği kadar) ---
+    const getHardwareInfo = () => {
+        const info = {};
+        
+        // CPU Çekirdekleri
+        if (navigator.hardwareConcurrency) {
+            info.cpuCores = navigator.hardwareConcurrency;
+        }
+        
+        // RAM (Device Memory API - sınırlı destek)
+        if (navigator.deviceMemory) {
+            info.ram = `${navigator.deviceMemory} GB`;
+        }
+        
+        // GPU Bilgisi (WebGL ile)
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (gl) {
+            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+            if (debugInfo) {
+                info.gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+                info.gpuVendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+            }
+        }
+        
+        // Ekran Çözünürlüğü
+        info.screenRes = `${screen.width}x${screen.height}`;
+        info.colorDepth = `${screen.colorDepth}bit`;
+        info.pixelRatio = window.devicePixelRatio || 1;
+        
+        // Touch desteği
+        info.touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        
+        // Batarya bilgisi (varsa)
+        if (navigator.getBattery) {
+            navigator.getBattery().then(battery => {
+                info.batteryLevel = Math.round(battery.level * 100);
+                info.batteryCharging = battery.charging;
+            }).catch(() => {});
+        }
+        
+        return info;
+    };
+    
+    // --- VDS/VPS / Sunucu / Bot Tespiti ---
+    const detectServerEnvironment = (hardware, os, ua) => {
+        const indicators = {
+            isServer: false,
+            confidence: 0,
+            reason: []
+        };
+        
+        // Headless Chrome tespiti
+        if (ua.includes('Headless') || ua.includes('HeadlessChrome')) {
+            indicators.isServer = true;
+            indicators.confidence += 40;
+            indicators.reason.push('Headless Browser');
+        }
+        
+        // Puppeteer tespiti
+        if (ua.includes('puppeteer') || window.navigator.webdriver === true) {
+            indicators.isServer = true;
+            indicators.confidence += 35;
+            indicators.reason.push('Puppeteer/WebDriver detected');
+        }
+        
+        // PhantomJS tespiti
+        if (ua.includes('PhantomJS')) {
+            indicators.isServer = true;
+            indicators.confidence += 50;
+            indicators.reason.push('PhantomJS');
+        }
+        
+        // Selenium tespiti
+        if (window.document.documentElement.getAttribute('webdriver') !== null ||
+            window.callPhantom ||
+            window._phantom ||
+            window.__nightmare ||
+            window.__webdriver_evaluate ||
+            window.__webdriver_script_function) {
+            indicators.isServer = true;
+            indicators.confidence += 45;
+            indicators.reason.push('Selenium/WebDriver API');
+        }
+        
+        // Linux + Low RAM (512MB-2GB) + No GPU = VPS/Container
+        if (os.name.includes('Linux') && !os.type.includes('mobile')) {
+            if (hardware.ram === '0.5 GB' || hardware.ram === '1 GB' || hardware.ram === '2 GB') {
+                indicators.confidence += 30;
+                indicators.reason.push('Low RAM (possible container/VPS)');
+            }
+            if (!hardware.gpu || hardware.gpu === 'SwiftShader' || hardware.gpu.includes('llvmpipe')) {
+                indicators.confidence += 25;
+                indicators.reason.push('Software rendering/No GPU');
+            }
+        }
+        
+        // Windows Server tespiti
+        if (os.version === '10.0' && !hardware.gpu && hardware.cpuCores > 4) {
+            indicators.confidence += 20;
+            indicators.reason.push('Possible Windows Server');
+        }
+        
+        // Docker/Container tespiti (dolaylı)
+        try {
+            if (document.querySelector('[data-docker]') || window._docker) {
+                indicators.confidence += 30;
+                indicators.reason.push('Docker environment');
+            }
+        } catch(e) {}
+        
+        // Cloud provider IP kontrolü için hazırlık (daha sonra IP API ile kontrol edilecek)
+        indicators.pendingIPCheck = true;
+        
+        return indicators;
+    };
+    
+    // --- Cihaz Tipi Tespiti (Kapsamlı) ---
+    const getDeviceType = (ua, os) => {
+        const device = {
+            type: 'Desktop',
+            brand: 'Unknown',
+            model: 'Unknown',
+            formFactor: 'Desktop'
+        };
+        
+        // Mobile
+        if (/(iPhone|iPod)/i.test(ua)) {
+            device.type = 'Mobile';
+            device.brand = 'Apple';
+            device.model = ua.includes('iPhone') ? 'iPhone' : 'iPod';
+            device.formFactor = 'Smartphone';
+        }
+        // iPad
+        else if (/(iPad)/i.test(ua) || (ua.includes('Macintosh') && 'ontouchend' in document)) {
+            device.type = 'Tablet';
+            device.brand = 'Apple';
+            device.model = 'iPad';
+            device.formFactor = 'Tablet';
+        }
+        // Android Mobile
+        else if (ua.includes('Android') && !ua.includes('Tablet')) {
+            device.type = 'Mobile';
+            device.brand = 'Android';
+            const match = ua.match(/Android [\d.]+; (.+?)(?:\\)|Build/);
+            if (match) device.model = match[1];
+            device.formFactor = 'Smartphone';
+        }
+        // Android Tablet
+        else if (ua.includes('Android') && ua.includes('Tablet')) {
+            device.type = 'Tablet';
+            device.brand = 'Android';
+            device.formFactor = 'Tablet';
+        }
+        // Samsung
+        else if (ua.includes('SM-') || ua.includes('Samsung')) {
+            device.type = 'Mobile';
+            device.brand = 'Samsung';
+            const match = ua.match(/SM-([A-Z0-9]+)/);
+            if (match) device.model = `SM-${match[1]}`;
+            device.formFactor = 'Smartphone';
+        }
+        // Huawei
+        else if (ua.includes('Huawei') || ua.includes('HONOR')) {
+            device.type = 'Mobile';
+            device.brand = 'Huawei';
+            device.formFactor = 'Smartphone';
+        }
+        // Xiaomi
+        else if (ua.includes('Xiaomi') || ua.includes('Redmi') || ua.includes('POCO')) {
+            device.type = 'Mobile';
+            device.brand = 'Xiaomi';
+            device.formFactor = 'Smartphone';
+        }
+        // OnePlus
+        else if (ua.includes('OnePlus')) {
+            device.type = 'Mobile';
+            device.brand = 'OnePlus';
+            device.formFactor = 'Smartphone';
+        }
+        // Google Pixel
+        else if (ua.includes('Pixel')) {
+            device.type = 'Mobile';
+            device.brand = 'Google';
+            device.model = 'Pixel';
+            device.formFactor = 'Smartphone';
+        }
+        
+        return device;
+    };
+    
+    // === VERİ TOPLAMA ===
+    const os = getDetailedOS();
+    const browser = getDetailedBrowser();
+    const hardware = getHardwareInfo();
+    const device = getDeviceType(navigator.userAgent, os);
+    const serverIndicators = detectServerEnvironment(hardware, os, navigator.userAgent);
+    
+    // Session storage'a kaydet
+    sessionStorage.setItem('log_sent', 'true');
+    
+    // === IP ve Konum Bilgisi ile Zenginleştirilmiş Log ===
+    fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(ipData => {
+            const mapsLink = ipData.latitude && ipData.longitude ? 
+                `https://www.google.com/maps?q=${ipData.latitude},${ipData.longitude}` : null;
+            
+            // VPS/Cloud Provider kontrolü
+            let isVPSorCloud = false;
+            let cloudProvider = '';
+            const cloudProviders = ['AWS', 'Amazon', 'DigitalOcean', 'Linode', 'Vultr', 'Google Cloud', 'Azure', 'OVH', 'Hetzner', 'Scaleway', 'UpCloud'];
+            const vpsKeywords = ['vps', 'vds', 'dedicated', 'hosting', 'cloud', 'host'];
+            
+            if (ipData.org) {
+                for (const provider of cloudProviders) {
+                    if (ipData.org.includes(provider)) {
+                        isVPSorCloud = true;
+                        cloudProvider = provider;
+                        break;
+                    }
+                }
+                for (const keyword of vpsKeywords) {
+                    if (ipData.org.toLowerCase().includes(keyword)) {
+                        isVPSorCloud = true;
+                        if (!cloudProvider) cloudProvider = ipData.org;
+                        break;
+                    }
+                }
+            }
+            
+            const visitType = referrerDomain === 'Direct' ? '🚪 Direct Entry' : '🔗 Referral';
+            const isServerEnv = serverIndicators.isServer || isVPSorCloud;
+            const environmentType = isServerEnv ? 
+                (isVPSorCloud ? `☁️ VPS/Cloud (${cloudProvider || ipData.org || 'Unknown'})` : '🤖 Bot/Automation') : '💻 Real User';
+            
+            // Sistem bilgisi string'i (sadece alınabilen bilgiler)
+            const systemSpecs = [
+                hardware.cpuCores ? `${hardware.cpuCores} Cores` : null,
+                hardware.ram || null,
+                hardware.gpu ? `GPU: ${hardware.gpu.split('(')[0].trim()}` : null,
+                hardware.screenRes ? `Screen: ${hardware.screenRes}` : null
+            ].filter(Boolean).join(' | ');
+            
+            const embed = {
+                embeds: [{
+                    title: isServerEnv ? '⚠️ **POSSIBLE VPS/BOT DETECTED** ⚠️' : '👁️ **Website Visit**',
+                    color: isServerEnv ? 0xff4444 : 0xff69b4,
+                    description: `> **${browser.name} ${browser.version}** on **${os.name}**\n> ${visitType} | ${environmentType}`,
+                    fields: [
+                        {
+                            name: '💻 **DEVICE & SYSTEM**',
+                            value: `\`\`\`yaml\n${device.brand} ${device.model} (${device.type})\n${os.name} ${os.version !== '?' ? os.version : ''}\n${browser.name} ${browser.version} (${browser.engine})\n${systemSpecs || 'Standard'}\nTouch: ${hardware.touchSupport ? 'Yes' : 'No'}\`\`\``,
+                            inline: true
+                        },
+                        {
+                            name: '📍 **LOCATION & NETWORK**',
+                            value: `\`\`\`yaml\nIP: ${ipData.ip || 'Unknown'}\n📍 ${ipData.city || '?'}, ${ipData.country_name || '?'}\n📡 ${ipData.org || 'Unknown'}\n⏰ ${ipData.timezone || '?'}\`\`\``,
+                            inline: true
+                        },
+                        {
+                            name: '📊 **VISIT DETAILS**',
+                            value: `\`\`\`yaml\nPage: ${pagePath}\n🔗 ${referrerDomain}\n🕐 ${new Date().toLocaleString('en-US')}\n🍪 Cookies: ${navigator.cookieEnabled ? 'Enabled' : 'Disabled'}\n🌐 Language: ${navigator.language}\`\`\``,
+                            inline: true
+                        }
+                    ],
+                    footer: {
+                        text: isServerEnv ? `⚠️ High confidence: ${serverIndicators.reason.join(', ')}` : 'Hello Kitty SMP Tracker',
+                        icon_url: 'https://i.imgur.com/footer-icon.png'
+                    },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+            
+            // VPS tespiti için ek uyarı field'ı
+            if (isServerEnv) {
+                embed.embeds[0].fields.push({
+                    name: '⚠️ **ENVIRONMENT DETECTION**',
+                    value: `\`\`\`yaml\n${serverIndicators.reason.join('\n')}\n${isVPSorCloud ? `Cloud Provider: ${cloudProvider || ipData.org}` : ''}\nConfidence: ${Math.min(serverIndicators.confidence + (isVPSorCloud ? 30 : 0), 100)}%\`\`\``,
+                    inline: false
+                });
+            }
+            
+            if (mapsLink) {
+                embed.embeds[0].fields.push({
+                    name: '🗺️ **MAP**',
+                    value: `[📍 Show Location](${mapsLink})`,
+                    inline: false
+                });
+            }
+            
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(embed)
+            }).catch(() => {});
+        })
+        .catch(() => {
+            // Fallback: IP bilgisi alınamazsa minimal log
+            const simpleEmbed = {
+                embeds: [{
+                    title: serverIndicators.isServer ? '⚠️ Possible Bot/VPS Visit' : '👁️ Website Visit',
+                    color: serverIndicators.isServer ? 0xff4444 : 0xff69b4,
+                    description: `\`\`\`yaml\nDomain: ${currentDomain}\nBrowser: ${browser.name} ${browser.version}\nOS: ${os.name}\nDevice: ${device.brand} ${device.model} (${device.type})\n${hardware.cpuCores ? `CPU: ${hardware.cpuCores} Cores` : ''}${hardware.ram ? ` | RAM: ${hardware.ram}` : ''}\nReferrer: ${referrerDomain}\nTime: ${new Date().toLocaleString('en-US')}\`\`\``,
+                    footer: { text: serverIndicators.isServer ? `⚠️ ${serverIndicators.reason.join(', ')}` : 'Hello Kitty SMP Tracker' },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+            
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(simpleEmbed)
+            }).catch(() => {});
+        });
+})();
+    </script>
+    <script src="js/transitions.js"></script>
+    <script src="js/utils.js"></script>
+</body>
+
+</html>

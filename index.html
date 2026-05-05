@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style id="transition-prevent-flash">body{opacity:0;transition:opacity 0.2s ease-in-out;}</style>
+    <script>(function(){if(sessionStorage.getItem('pageTransition')!=='true'){document.getElementById('transition-prevent-flash').textContent='body{opacity:1;transition:opacity 0.2s ease-in-out;}';}})();</script>
+    <title>Hello Kitty SMP — Season 2</title>
+    <meta name="description" content="The cutest Minecraft server. Modern design, adorable mods, friendly community.">
+    <link rel="stylesheet" href="css/theme.css">
+    <style>
+        /* ---- Hero ---- */
+        .hero{position:relative;z-index:5;padding:5rem 4rem 3rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;max-width:1280px;margin:0 auto;min-height:80vh;}
+        .hero-content{max-width:560px;flex-shrink:0;}
+        .season-tag{display:flex;align-items:center;gap:0.6rem;margin-bottom:1.5rem;}
+        .season-text{font-size:0.72rem;font-weight:600;color:var(--pink-pale);letter-spacing:0.12em;text-transform:uppercase;}
+        .hero-content h1{font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.0;margin-bottom:1rem;}
+        .hero-content h1 .line1{color:#fce7f3;display:block;}
+        .hero-content h1 .line2{background:linear-gradient(135deg,#ff69b4,#ff1493,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 30px rgba(255,20,147,0.5));display:block;}
+        .hero-content p{color:var(--text-muted);font-size:0.95rem;line-height:1.75;margin-bottom:2rem;max-width:420px;}
+        .hero-btns{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1.75rem;}
+        .ip-row{display:flex;align-items:center;gap:0.75rem;}
+        .ip-label{font-size:0.7rem;color:#4b5563;text-transform:uppercase;letter-spacing:0.1em;}
+        .ip-chip{background:rgba(255,20,147,0.1);border:1px solid rgba(255,105,180,0.25);border-radius:5px;padding:0.28rem 0.8rem;font-family:monospace;font-size:0.82rem;color:var(--pink-pale);}
+        @media(max-width:1024px){.hero{min-height:auto;padding:5rem 2rem 3rem;}}
+        @media(max-width:768px){.hero{flex-direction:column;text-align:center;}.hero-content{max-width:100%;}.hero-btns{justify-content:center;}.ip-row{justify-content:center;}}
+
+        /* ---- Stats Ticker ---- */
+        .stats-ticker-wrap{position:relative;z-index:5;overflow:hidden;border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);background:linear-gradient(90deg,rgba(255,20,147,0.08),rgba(219,39,119,0.05),rgba(255,20,147,0.08));}
+        .stats-ticker{overflow:hidden;padding:0;}
+        .ticker-track{display:flex;width:max-content;animation:ticker 22s linear infinite;}
+        .ticker-track:hover{animation-play-state:paused;}
+        @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .ticker-item{display:flex;align-items:center;gap:1rem;padding:1.1rem 2.5rem;white-space:nowrap;flex-shrink:0;}
+        .ticker-num{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;background:linear-gradient(135deg,#ff69b4,#ff1493);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+        .ticker-sep{color:rgba(255,20,147,0.4);font-size:0.7rem;}
+        .ticker-label{font-size:0.72rem;color:#4b5563;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;}
+        .ticker-fade-left{position:absolute;left:0;top:0;bottom:0;width:80px;background:linear-gradient(90deg,var(--bg),transparent);z-index:2;pointer-events:none;}
+        .ticker-fade-right{position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(270deg,var(--bg),transparent);z-index:2;pointer-events:none;}
+        #trail-canvas{position:fixed;inset:0;pointer-events:none;z-index:999;}
+
+        /* ---- Features ---- */
+        .features-section{position:relative;z-index:5;padding:4rem 2rem;}
+        .section-header{text-align:center;margin-bottom:3rem;}
+        .features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,105,180,0.12);max-width:1280px;margin:0 auto;}
+        .feat{background:var(--bg);padding:1.75rem;transition:background 0.3s;cursor:pointer;position:relative;overflow:hidden;}
+        .feat::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,20,147,0.18),rgba(180,0,120,0.08) 50%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);opacity:0;transition:opacity 0.4s;left:var(--mx,50%);top:var(--my,50%);}
+        .feat:hover::before{opacity:1;}
+        .feat:hover{background:rgba(255,20,147,0.05);}
+        .feat-num{font-size:0.65rem;color:#374151;font-weight:700;letter-spacing:0.12em;margin-bottom:0.75rem;font-family:'Space Grotesk',sans-serif;}
+        .feat-icon{font-size:1.75rem;margin-bottom:0.75rem;color:var(--pink-pale);}
+        .feat h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;color:#fce7f3;margin-bottom:0.35rem;font-weight:600;}
+        .feat p{font-size:0.8rem;color:#4b5563;line-height:1.6;}
+        .feat-arrow{color:var(--pink-dim);font-size:0.85rem;margin-top:0.75rem;transition:color 0.2s;}
+        .feat:hover .feat-arrow{color:var(--pink-light);}
+
+        /* ---- Globe ---- */
+        .hero-globe{
+            width:340px;
+            height:340px;
+            flex-shrink:0;
+            pointer-events:auto;
+            z-index:4;
+            opacity:0;
+            animation:globeFadeIn 1.2s ease-out 1.2s forwards;
+            border-radius:50%;
+        }
+        @keyframes globeFadeIn{to{opacity:1}}
+        #globe-canvas{width:100%!important;height:100%!important;cursor:grab;border-radius:50%;display:block;}
+        #globe-canvas:active{cursor:grabbing;}
+        @media(max-width:1200px){.hero-globe{width:280px;height:280px;}}
+        @media(max-width:1024px){.hero-globe{width:220px;height:220px;opacity:0.6;}}
+        @media(max-width:768px){.hero-globe{display:none;}}
+        .hero-content > *{opacity:0;transform:translateY(28px);}
+        .hero-content .season-tag{animation:heroIn 0.7s ease-out 0.1s forwards;}
+        .hero-content h1{animation:heroIn 0.8s ease-out 0.25s forwards;}
+        .hero-content p{animation:heroIn 0.7s ease-out 0.5s forwards;}
+        .hero-content .hero-btns{animation:heroIn 0.7s ease-out 0.65s forwards;}
+        .hero-content .ip-row{animation:heroIn 0.7s ease-out 0.8s forwards;}
+        @keyframes heroIn{to{opacity:1;transform:translateY(0);}}
+
+        /* ---- Gallery ---- */
+        .gallery-section{position:relative;z-index:5;padding:4rem 2rem;}
+        .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1280px;margin:0 auto;}
+        .gallery-item{border-radius:1rem;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--border);transition:all 0.35s;position:relative;cursor:pointer;}
+        .gallery-item::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,20,147,0.4),transparent 65%);opacity:0;transition:opacity 0.4s;pointer-events:none;}
+        .gallery-item:hover::after{opacity:1;}
+        .gallery-item:hover{box-shadow:0 0 35px rgba(255,20,147,0.35);transform:scale(1.025);border-color:rgba(255,20,147,0.6);}
+        .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s;}
+        .gallery-item:hover img{transform:scale(1.1);}
+        .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);display:flex;align-items:flex-end;padding:1.25rem;opacity:0;transition:opacity 0.3s;}
+        .gallery-item:hover .gallery-overlay{opacity:1;}
+        .gallery-title{color:white;font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;text-shadow:0 0 12px rgba(255,20,147,0.8);}
+
+        /* ---- Team ---- */
+        .team-section{position:relative;z-index:5;padding:4rem 2rem;}
+        .team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;max-width:1280px;margin:0 auto;perspective:800px;}
+        .team-card{text-align:center;transform-style:preserve-3d;transition:transform 0.12s ease-out;will-change:transform;}
+        .team-avatar{width:5rem;height:5rem;border-radius:50%;border:2px solid rgba(255,105,180,0.3);margin:0 auto 0.75rem;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:all 0.3s;color:var(--pink-pale);}
+        .team-card:hover .team-avatar{border-color:var(--pink);box-shadow:0 0 24px rgba(255,20,147,0.5);}
+        .team-name{font-family:'Space Grotesk',sans-serif;font-size:0.95rem;color:#fce7f3;margin-bottom:0.2rem;}
+        .team-role{font-size:0.78rem;color:var(--pink-light);font-weight:500;}
+
+        /* ---- CTA ---- */
+        .cta-section{position:relative;z-index:5;padding:5rem 2rem;text-align:center;overflow:hidden;}
+        .cta-particle{position:absolute;border-radius:50%;pointer-events:none;animation:floatUp var(--fd,6s) ease-in-out infinite var(--fdelay,0s);}
+        @keyframes floatUp{0%,100%{transform:translateY(0) scale(1);opacity:var(--fo,0.3)}50%{transform:translateY(-50px) scale(1.3);opacity:calc(var(--fo,0.3)*1.8)}}
+        .cta-inner{max-width:600px;margin:0 auto;position:relative;z-index:2;}
+
+        /* ---- Navbar scroll ---- */
+        .navbar{transition:background 0.4s,border-color 0.4s,box-shadow 0.4s;}
+        .navbar.scrolled{background:rgba(8,5,16,0.97);border-bottom-color:rgba(255,20,147,0.4);box-shadow:0 4px 30px rgba(255,20,147,0.12);}
+
+        /* ---- Footer wave ---- */
+        .footer-wave{position:relative;height:55px;overflow:hidden;line-height:0;background:transparent;}
+        .footer-wave svg{position:absolute;bottom:0;left:0;width:200%;animation:waveScroll 7s linear infinite;}
+        @keyframes waveScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .cta-inner h2{font-size:2.5rem;background:linear-gradient(135deg,#ff69b4,#ff1493);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;}
+        .cta-inner p{color:var(--text-muted);margin-bottom:2rem;}
+        .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;}
+        .server-box{display:inline-flex;align-items:center;gap:0.75rem;background:rgba(255,20,147,0.08);border:1px solid rgba(255,105,180,0.2);border-radius:8px;padding:0.5rem 1.25rem;}
+        .server-label{font-size:0.72rem;color:#4b5563;text-transform:uppercase;letter-spacing:0.1em;}
+        .server-ip{font-family:monospace;font-size:0.9rem;color:var(--pink-pale);}
+
+        /* ---- Modal ---- */
+        .modal{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1rem;}
+        .modal.active{display:flex;}
+        .modal-box{background:#0d0a1a;border:1px solid rgba(255,105,180,0.3);border-radius:1.5rem;padding:2rem;max-width:500px;width:100%;position:relative;animation:scaleIn 0.3s ease-out;}
+        @keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+        .modal-close{position:absolute;top:1rem;right:1rem;background:rgba(255,20,147,0.1);border:none;color:var(--pink-pale);width:2rem;height:2rem;border-radius:50%;cursor:pointer;font-size:1rem;transition:all 0.2s;}
+        .modal-close:hover{background:rgba(255,20,147,0.25);transform:rotate(90deg);}
+        .modal-icon{font-size:2.5rem;text-align:center;margin-bottom:1rem;color:var(--pink-pale);}
+        .modal-title{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;color:#fce7f3;text-align:center;margin-bottom:0.25rem;}
+        .modal-sub{color:var(--text-muted);font-size:0.85rem;text-align:center;margin-bottom:1.5rem;}
+        .modal-img{border-radius:0.75rem;overflow:hidden;margin-bottom:1.5rem;border:1px solid var(--border);}
+        .modal-img img{width:100%;display:block;}
+        .modal-feats{display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin-bottom:1.5rem;}
+        .modal-feat{background:rgba(255,20,147,0.07);border:1px solid rgba(255,105,180,0.15);border-radius:0.75rem;padding:0.9rem;text-align:center;}
+        .modal-feat-icon{font-size:1.25rem;margin-bottom:0.35rem;color:var(--pink-pale);}
+        .modal-feat-title{font-size:0.82rem;font-weight:600;color:#fce7f3;margin-bottom:0.15rem;}
+        .modal-feat-text{font-size:0.75rem;color:var(--text-muted);}
+        .modal-dl{width:100%;background:linear-gradient(135deg,#db2777,#ff1493,#ff69b4);color:white;border:none;padding:0.9rem;border-radius:9999px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:'Space Grotesk',sans-serif;box-shadow:0 0 20px rgba(255,20,147,0.4);transition:all 0.2s;}
+        .modal-dl:hover{box-shadow:0 0 32px rgba(255,20,147,0.65);transform:translateY(-2px);}
+        .modal-footer-txt{text-align:center;color:#374151;font-size:0.75rem;margin-top:0.75rem;}
+
+        /* ---- Animated counter section ---- */
+        .counter-section{position:relative;z-index:5;padding:4rem 2rem;}
+        .counter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:1280px;margin:0 auto;}
+        .counter-card{background:rgba(255,255,255,0.02);border:1px solid var(--border2);border-radius:1.25rem;padding:2rem 1.5rem;text-align:center;transition:all 0.3s;position:relative;overflow:hidden;}
+        .counter-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,20,147,0.08),transparent 70%);pointer-events:none;}
+        .counter-card:hover{border-color:rgba(255,20,147,0.35);transform:translateY(-4px);box-shadow:0 12px 30px rgba(255,20,147,0.12);}
+        .counter-icon{font-size:2rem;margin-bottom:0.75rem;color:var(--pink-pale);}
+        .counter-num{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700;background:linear-gradient(135deg,#ff69b4,#ff1493);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:0.4rem;}
+        .counter-label{font-size:0.75rem;color:#4b5563;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;}
+        body.gold-theme .counter-num{background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+        body.gold-theme .counter-card::before{background:radial-gradient(circle at 50% 0%,rgba(245,158,11,0.08),transparent 70%);}
+        body.gold-theme .counter-card:hover{border-color:rgba(245,158,11,0.35);box-shadow:0 12px 30px rgba(245,158,11,0.12);}
+        @media(max-width:768px){.counter-grid{grid-template-columns:repeat(2,1fr);}}
+
+        /* ---- Walking cat ---- */
+        #kitty-cat{position:fixed;bottom:0;z-index:500;pointer-events:none;user-select:none;font-size:2rem;transition:transform 0.1s linear;filter:drop-shadow(0 0 8px rgba(255,20,147,0.6));}
+        #kitty-bubble{position:fixed;z-index:501;background:rgba(8,5,16,0.92);border:1px solid rgba(255,105,180,0.4);border-radius:1rem 1rem 1rem 0;padding:0.35rem 0.75rem;font-size:0.75rem;font-weight:600;color:#fce7f3;pointer-events:none;white-space:nowrap;opacity:0;transition:opacity 0.3s;font-family:'Space Grotesk',sans-serif;}
+        #kitty-bubble::after{content:'';position:absolute;bottom:-6px;left:10px;border:6px solid transparent;border-top-color:rgba(255,105,180,0.4);}
+        /* ---- Loading screen ---- */
+        #loading-screen{position:fixed;inset:0;z-index:9998;background:#080510;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.8s ease,visibility 0.8s ease;overflow:hidden;}
+        #loading-screen.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+
+        /* Grid bg on loader */
+        #loading-screen::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,105,180,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,105,180,0.07) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+
+        /* Orbs */
+        .ld-orb1{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,20,147,0.2),transparent 70%);top:-150px;left:-150px;animation:ldOrb 4s ease-in-out infinite;}
+        .ld-orb2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(219,39,119,0.15),transparent 70%);bottom:-100px;right:-100px;animation:ldOrb 4s ease-in-out infinite 2s;}
+        @keyframes ldOrb{0%,100%{transform:scale(1) translate(0,0)}50%{transform:scale(1.15) translate(20px,-20px)}}
+
+        /* Stars on loader */
+        .ld-stars{position:absolute;inset:0;pointer-events:none;}
+        .ld-star{position:absolute;border-radius:50%;background:white;animation:ldTwinkle var(--d,3s) ease-in-out infinite var(--dl,0s);}
+        @keyframes ldTwinkle{0%,100%{opacity:0.1}50%{opacity:0.8}}
+
+        /* Center content */
+        .ld-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;}
+
+        /* Big cat with ring */
+        .ld-cat-wrap{position:relative;width:120px;height:120px;margin-bottom:2rem;}
+        .ld-ring{position:absolute;inset:0;border-radius:50%;border:2px solid transparent;border-top-color:#ff1493;border-right-color:rgba(255,20,147,0.3);animation:ldSpin 1.2s linear infinite;}
+        .ld-ring2{position:absolute;inset:8px;border-radius:50%;border:1.5px solid transparent;border-bottom-color:#ff69b4;border-left-color:rgba(255,105,180,0.2);animation:ldSpin 1.8s linear infinite reverse;}
+        @keyframes ldSpin{to{transform:rotate(360deg)}}
+        .ld-cat-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;animation:ldCatPulse 1.5s ease-in-out infinite;}
+        @keyframes ldCatPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+
+        /* Logo text */
+        .ld-logo{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;background:linear-gradient(135deg,#ff69b4,#ff1493,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.5rem;letter-spacing:-0.02em;animation:ldFadeUp 0.6s ease-out 0.2s both;}
+        .ld-sub{font-size:0.75rem;color:#4b5563;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:2rem;animation:ldFadeUp 0.6s ease-out 0.4s both;}
+        @keyframes ldFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+        /* Progress bar */
+        .ld-bar-wrap{width:260px;position:relative;animation:ldFadeUp 0.6s ease-out 0.5s both;}
+        .ld-bar-track{height:3px;background:rgba(255,105,180,0.12);border-radius:9999px;overflow:hidden;margin-bottom:0.75rem;}
+        .ld-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,#db2777,#ff1493,#ff69b4,#f9a8d4);border-radius:9999px;animation:ldFill 1.8s cubic-bezier(0.4,0,0.2,1) forwards;box-shadow:0 0 8px rgba(255,20,147,0.6);}
+        @keyframes ldFill{0%{width:0%}60%{width:75%}85%{width:92%}100%{width:100%}}
+
+        /* Dots */
+        .ld-dots{display:flex;gap:0.5rem;justify-content:center;}
+        .ld-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,20,147,0.3);animation:ldDot 1.2s ease-in-out infinite;}
+        .ld-dot:nth-child(2){animation-delay:0.2s;}
+        .ld-dot:nth-child(3){animation-delay:0.4s;}
+        @keyframes ldDot{0%,100%{background:rgba(255,20,147,0.2);transform:scale(1)}50%{background:#ff1493;transform:scale(1.4);box-shadow:0 0 8px rgba(255,20,147,0.6)}}
+
+        /* ---- Scroll to top ---- */
+        .scroll-top{position:fixed;bottom:2rem;right:2rem;z-index:300;width:3rem;height:3rem;border-radius:50%;background:linear-gradient(135deg,#db2777,#ff1493,#ff69b4);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 0 20px rgba(255,20,147,0.5);opacity:0;transform:translateY(20px) scale(0.8);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;}
+        .scroll-top.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:all;}
+        .scroll-top:hover{box-shadow:0 0 30px rgba(255,20,147,0.75);transform:translateY(-3px) scale(1.1);}
+        body.gold-theme .scroll-top{background:linear-gradient(135deg,#d97706,#f59e0b,#fbbf24);box-shadow:0 0 20px rgba(245,158,11,0.5);}
+        body.gold-theme .scroll-top:hover{box-shadow:0 0 30px rgba(245,158,11,0.75);}
+
+        /* ---- Mobile menu ---- */
+        .menu-btn{display:none;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--pink-pale);width:2.25rem;height:2.25rem;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;transition:all 0.2s;flex-shrink:0;}
+        .menu-btn:hover{background:rgba(255,20,147,0.1);border-color:rgba(255,20,147,0.4);}
+        .mobile-menu{position:fixed;top:4rem;left:0;right:0;z-index:90;background:rgba(8,5,16,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:1rem 1.5rem 1.5rem;transform:translateY(-110%);transition:transform 0.35s cubic-bezier(0.34,1.2,0.64,1);opacity:0;}
+        .mobile-menu.open{transform:translateY(0);opacity:1;}
+        .mobile-menu a{display:block;padding:0.75rem 0.5rem;color:#9ca3af;font-size:0.9rem;font-weight:500;text-decoration:none;border-bottom:1px solid var(--border2);transition:color 0.2s;}
+        .mobile-menu a:hover{color:var(--pink-light);}
+        .mobile-menu a:last-child{border-bottom:none;}
+        .mobile-menu .mob-btns{display:flex;gap:0.75rem;margin-top:1rem;}
+        @media(max-width:768px){
+            .nav-links{display:none!important;}
+            .nav-right .btn-ghost,.nav-right .btn-nav{display:none;}
+            .menu-btn{display:flex;}
+        }
+
+        /* ---- Theme Toggle Button ---- */
+        .theme-toggle{position:relative;width:52px;height:28px;cursor:pointer;flex-shrink:0;}
+        .theme-toggle input{opacity:0;width:0;height:0;position:absolute;}
+        .toggle-track{position:absolute;inset:0;border-radius:9999px;background:rgba(255,20,147,0.15);border:1px solid rgba(255,105,180,0.3);transition:all 0.5s;overflow:hidden;}
+        .toggle-track::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,20,147,0.2),rgba(219,39,119,0.1));transition:opacity 0.5s;}
+        .toggle-thumb{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#ff69b4,#ff1493);box-shadow:0 0 10px rgba(255,20,147,0.6);transition:all 0.45s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;justify-content:center;font-size:11px;z-index:2;}
+        .toggle-icon-pink{position:absolute;transition:opacity 0.3s,transform 0.3s;}
+        .toggle-icon-gold{position:absolute;transition:opacity 0.3s,transform 0.3s;opacity:0;transform:scale(0.5);}
+        .theme-toggle input:checked ~ .toggle-track{background:rgba(234,179,8,0.15);border-color:rgba(234,179,8,0.4);}
+        .theme-toggle input:checked ~ .toggle-track::before{background:linear-gradient(135deg,rgba(234,179,8,0.25),rgba(202,138,4,0.1));}
+        .theme-toggle input:checked ~ .toggle-thumb{left:27px;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 0 12px rgba(251,191,36,0.7);}
+        .theme-toggle input:checked ~ .toggle-thumb .toggle-icon-pink{opacity:0;transform:scale(0.5);}
+        .theme-toggle input:checked ~ .toggle-thumb .toggle-icon-gold{opacity:1;transform:scale(1);}
+
+        /* ---- Gold theme overrides ---- */
+        body.gold-theme{
+            --bg:#080a03;
+            --bg2:#0f1205;
+            --pink:#f59e0b;
+            --pink-light:#fbbf24;
+            --pink-pale:#fde68a;
+            --pink-dim:#d97706;
+            --pink-faint:rgba(245,158,11,0.08);
+            --border:rgba(251,191,36,0.18);
+            --border2:rgba(251,191,36,0.1);
+            --text:#fefce8;
+        }
+        body.gold-theme .bg-grid{background-image:linear-gradient(rgba(251,191,36,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,0.07) 1px,transparent 1px);}
+        body.gold-theme .bg-orb-1{background:radial-gradient(circle,rgba(245,158,11,0.16),transparent 70%);}
+        body.gold-theme .bg-orb-2{background:radial-gradient(circle,rgba(251,191,36,0.1),transparent 70%);}
+        body.gold-theme .logo{background:linear-gradient(135deg,#fbbf24,#f59e0b,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 10px rgba(245,158,11,0.4));}
+        body.gold-theme .nav-links a:hover{color:#fbbf24;}
+        body.gold-theme .btn-primary,.gold-theme .btn-nav,.gold-theme .modal-dl{background:linear-gradient(135deg,#d97706,#f59e0b,#fbbf24);box-shadow:0 0 20px rgba(245,158,11,0.4);}
+        body.gold-theme .btn-secondary{color:#fde68a;border-color:rgba(251,191,36,0.25);}
+        body.gold-theme .hero h1 .line2{background:linear-gradient(135deg,#fbbf24,#f59e0b,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 30px rgba(245,158,11,0.5));}
+        body.gold-theme .season-dot{background:#f59e0b;box-shadow:0 0 10px rgba(245,158,11,1);}
+        body.gold-theme .stat-n,.gold-theme .ticker-num{background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+        body.gold-theme .section-badge{background:rgba(245,158,11,0.1);color:#fde68a;border-color:rgba(251,191,36,0.25);}
+        body.gold-theme .features-grid{background:rgba(251,191,36,0.1);}
+        body.gold-theme .feat::before{background:radial-gradient(circle,rgba(245,158,11,0.2),rgba(180,120,0,0.08) 50%,transparent 70%);}
+        body.gold-theme .feat:hover{background:rgba(245,158,11,0.06);}
+        body.gold-theme .feat-arrow{color:#d97706;}
+        body.gold-theme .feat:hover .feat-arrow{color:#fbbf24;}
+        body.gold-theme .gallery-item::after{background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(245,158,11,0.4),transparent 65%);}
+        body.gold-theme .gallery-item:hover{box-shadow:0 0 35px rgba(245,158,11,0.35);border-color:rgba(251,191,36,0.6);}
+        body.gold-theme .gallery-title{text-shadow:0 0 12px rgba(245,158,11,0.8);}
+        body.gold-theme .team-card:hover .team-avatar{border-color:#f59e0b;box-shadow:0 0 24px rgba(245,158,11,0.5);}
+        body.gold-theme .team-role{color:#fbbf24;}
+        body.gold-theme .cta-inner h2{background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+        body.gold-theme .footer-logo{background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+        body.gold-theme .footer-wave svg path:first-child{fill:rgba(245,158,11,0.08);}
+        body.gold-theme .footer-wave svg path:last-child{fill:rgba(251,191,36,0.05);}
+        body.gold-theme .navbar.scrolled{border-bottom-color:rgba(251,191,36,0.4);box-shadow:0 4px 30px rgba(245,158,11,0.12);}
+        body.gold-theme .ip-chip{background:rgba(245,158,11,0.1);border-color:rgba(251,191,36,0.25);color:#fde68a;}
+        body.gold-theme .stats-ticker-wrap{background:linear-gradient(90deg,rgba(245,158,11,0.08),rgba(217,119,6,0.05),rgba(245,158,11,0.08));}
+        body.gold-theme .ticker-fade-left{background:linear-gradient(90deg,var(--bg),transparent);}
+        body.gold-theme .ticker-fade-right{background:linear-gradient(270deg,var(--bg),transparent);}
+        body.gold-theme .modal-box{border-color:rgba(251,191,36,0.3);}
+        body.gold-theme .modal-feat{background:rgba(245,158,11,0.07);border-color:rgba(251,191,36,0.15);}
+
+        /* Transition everything smoothly */
+        body{transition:background 0.6s,color 0.6s;}
+        .navbar,.btn-primary,.btn-nav,.logo,.hero h1 .line2,.stat-n,.ticker-num,.section-badge,.features-grid,.feat,.gallery-item,.team-role,.cta-inner h2,.footer-logo{transition:all 0.5s;}
+        
+        /* Font Awesome icon sizing */
+        .fa-fw { width: 1.25em; text-align: center; }
+        .counter-icon i, .feat-icon i, .modal-feat-icon i, .team-avatar i, .modal-icon i { font-size: inherit; }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="ld-orb1"></div>
+        <div class="ld-orb2"></div>
+        <div class="ld-stars" id="ldStars"></div>
+        <div class="ld-center">
+            <div class="ld-cat-wrap">
+                <div class="ld-ring"></div>
+                <div class="ld-ring2"></div>
+                <div class="ld-cat-emoji" id="ldCat"><i class="fas fa-cat"></i></div>
+            </div>
+            <div class="ld-logo"><i class="fas fa-heart"></i> Hello Kitty SMP</div>
+            <div class="ld-sub">Season 2 — Loading</div>
+            <div class="ld-bar-wrap">
+                <div class="ld-bar-track"><div class="ld-bar-fill"></div></div>
+                <div class="ld-dots">
+                    <div class="ld-dot"></div>
+                    <div class="ld-dot"></div>
+                    <div class="ld-dot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-grid"></div>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="stars" id="stars"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="logo"><i class="fas fa-heart"></i> Hello Kitty SMP</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="wiki.html">Wiki</a>
+            </div>
+            <div class="nav-right">
+                <button class="btn-ghost" id="signInBtn"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+                <button class="btn-nav" id="signUpBtn">Sign Up <i class="fas fa-arrow-right"></i></button>
+                <label class="theme-toggle" title="Change Theme">
+                    <input type="checkbox" id="themeToggle">
+                    <div class="toggle-track"></div>
+                    <div class="toggle-thumb">
+                        <span class="toggle-icon-pink"><i class="fas fa-heart"></i></span>
+                        <span class="toggle-icon-gold"><i class="fas fa-star"></i></span>
+                    </div>
+                </label>
+                <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="wiki.html"><i class="fas fa-book"></i> Wiki</a>
+        <a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+        <a href="support.html"><i class="fas fa-life-ring"></i> Support</a>
+        <div class="mob-btns">
+            <button class="btn-primary" style="flex:1;font-size:0.85rem;padding:0.6rem 1rem;" onclick="document.getElementById('downloadBtnHero').click()"><i class="fas fa-download"></i> Download Mod</button>
+        </div>
+    </div>
+
+    <!-- Scroll to top -->
+    <button class="scroll-top" id="scrollTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Walking kitty cat -->
+    <div id="kitty-cat"><i class="fas fa-cat"></i></div>
+    <div id="kitty-bubble">Meow!<i class="fas fa-cat"></i></div>
+
+    <canvas id="trail-canvas"></canvas>
+    <div class="page-wrap">
+        <!-- Hero -->
+        <div class="hero">
+            <div class="hero-content">
+                <div class="season-tag">
+                    <div class="season-dot"></div>
+                    <span class="season-text">Season 2 — Active</span>
+                </div>
+                <h1>
+                    <span class="line1">Hello</span>
+                    <span class="line2">Kitty SMP</span>
+                </h1>
+                <p>Welcome to the cutest Minecraft server. Modern design, adorable mods, and a friendly community await you.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary" id="downloadBtnHero"><i class="fas fa-download"></i> Download Mod</button>
+                    <a href="wiki.html" class="btn-secondary">Explore Wiki <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="ip-row">
+                    <span class="ip-label">Server IP</span>
+                    <span class="ip-chip">play.hellokittysmp.com</span>
+                </div>
+            </div>
+            <div class="hero-globe" id="heroGlobe">
+                <canvas id="globe-canvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Stats Ticker -->
+        <div class="stats-ticker-wrap">
+            <div class="ticker-fade-left"></div>
+            <div class="ticker-fade-right"></div>
+            <div class="stats-ticker">
+                <div class="ticker-track" id="tickerTrack">
+                    <div class="ticker-item"><span class="ticker-num">1,247+</span><span class="ticker-sep"><i class="fas fa-star"></i></span><span class="ticker-label">Active Players</span></div>
+                    <div class="ticker-item"><span class="ticker-num">3,892</span><span class="ticker-sep"><i class="fas fa-star"></i></span><span class="ticker-label">Houses Built</span></div>
+                    <div class="ticker-item"><span class="ticker-num">45.6K</span><span class="ticker-sep"><i class="fas fa-star"></i></span><span class="ticker-label">Hours Played</span></div>
+                    <div class="ticker-item"><span class="ticker-num">12</span><span class="ticker-sep"><i class="fas fa-star"></i></span><span class="ticker-label">Active Events</span></div>
+                    <div class="ticker-item"><span class="ticker-num">Season 2</span><span class="ticker-sep"><i class="fas fa-star"></i></span><span class="ticker-label">Currently Active</span></div>
+                    <div class="ticker-item"><span class="ticker-num">1,247+</span><span class="ticker-sep"><i class="fas fa-star"></i></span><span class="ticker-label">Active Players</span></div>
+                    <div class="ticker-item"><span class="ticker-num">3,892</span><span class="ticker-sep"><i class="fas fa-star"></i></span><span class="ticker-label">Houses Built</span></div>
+                    <div class="ticker-item"><span class="ticker-num">45.6K</span><span class="ticker-sep"><i class="fas fa-star"></i></span><span class="ticker-label">Hours Played</span></div>
+                    <div class="ticker-item"><span class="ticker-num">12</span><span class="ticker-sep"><i class="fas fa-star"></i></span><span class="ticker-label">Active Events</span></div>
+                    <div class="ticker-item"><span class="ticker-num">Season 2</span><span class="ticker-sep"><i class="fas fa-star"></i></span><span class="ticker-label">Currently Active</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Counter Section -->
+        <section class="counter-section" id="counterSection">
+            <div class="counter-grid">
+                <div class="counter-card">
+                    <div class="counter-icon"><i class="fas fa-users"></i></div>
+                    <div class="counter-num" data-target="1247" data-suffix="+">0</div>
+                    <div class="counter-label">Active Players</div>
+                </div>
+                <div class="counter-card">
+                    <div class="counter-icon"><i class="fas fa-home"></i></div>
+                    <div class="counter-num" data-target="3892">0</div>
+                    <div class="counter-label">Houses Built</div>
+                </div>
+                <div class="counter-card">
+                    <div class="counter-icon"><i class="fas fa-clock"></i></div>
+                    <div class="counter-num" data-target="45600" data-suffix="K" data-divide="1000">0</div>
+                    <div class="counter-label">Hours Played</div>
+                </div>
+                <div class="counter-card">
+                    <div class="counter-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="counter-num" data-target="12">0</div>
+                    <div class="counter-label">Active Events</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features-section">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-star"></i> FEATURES</div>
+                <h2 class="section-title">Why Hello Kitty SMP?</h2>
+                <p class="section-desc">The unique features that set us apart from the rest</p>
+            </div>
+            <div class="features-grid">
+                <div class="feat"><div class="feat-num">01</div><div class="feat-icon"><i class="fas fa-gamepad"></i></div><h3>Custom Mod</h3><p>Over 50 new Hello Kitty-themed items and costumes</p><div class="feat-arrow"><i class="fas fa-arrow-right"></i></div></div>
+                <div class="feat"><div class="feat-num">02</div><div class="feat-icon"><i class="fas fa-tree"></i></div><h3>Pink World</h3><p>Unique pink biomes and charming landscapes</p><div class="feat-arrow"><i class="fas fa-arrow-right"></i></div></div>
+                <div class="feat"><div class="feat-num">03</div><div class="feat-icon"><i class="fas fa-heart"></i></div><h3>Friendship</h3><p>A warm and welcoming community, a helpful team, and plenty of fun</p><div class="feat-arrow"><i class="fas fa-arrow-right"></i></div></div>
+                <div class="feat"><div class="feat-num">04</div><div class="feat-icon"><i class="fas fa-cat"></i></div><h3>Hello Kitty</h3><p>The characters are waiting for you on the server!</p><div class="feat-arrow"><i class="fas fa-arrow-right"></i></div></div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section class="gallery-section">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-camera"></i> GALLERY</div>
+                <h2 class="section-title">Photos from the Server</h2>
+                <p class="section-desc">The amazing structures built by our players</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="images/winter.jpg" alt="Winter Castle"><div class="gallery-overlay"><span class="gallery-title"><i class="fas fa-snowflake"></i> Winter Castle</span></div></div>
+                <div class="gallery-item"><img src="images/client.png" alt="Launcher"><div class="gallery-overlay"><span class="gallery-title"><i class="fas fa-rocket"></i> Hello Kitty Launcher</span></div></div>
+                <div class="gallery-item"><img src="images/halloween.jpg" alt="Halloween"><div class="gallery-overlay"><span class="gallery-title"><i class="fas fa-pumpkin"></i> Halloween</span></div></div>
+            </div>
+        </section>
+
+        <!-- Team -->
+        <section class="team-section">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-users"></i> TEAM</div>
+                <h2 class="section-title">Server Team</h2>
+                <p class="section-desc">Our wonderful team members who work for you</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card"><div class="team-avatar"><i class="fas fa-cat"></i></div><div class="team-name">Kitty</div><div class="team-role">Founder</div></div>
+                <div class="team-card"><div class="team-avatar"><i class="fas fa-crown"></i></div><div class="team-name">Mimi</div><div class="team-role">Admin</div></div>
+                <div class="team-card"><div class="team-avatar"><i class="fas fa-shield-alt"></i></div><div class="team-name">Pinky</div><div class="team-role">Moderator</div></div>
+                <div class="team-card"><div class="team-avatar"><i class="fas fa-gem"></i></div><div class="team-name">Rose</div><div class="team-role">Helper</div></div>
+                <div class="team-card"><div class="team-avatar"><i class="fas fa-leaf"></i></div><div class="team-name">Cherry</div><div class="team-role">Helper</div></div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section" id="ctaSection">
+            <div class="cta-inner">
+                <div class="section-badge"><i class="fas fa-gamepad"></i> GET STARTED NOW</div>
+                <h2>Join Now!</h2>
+                <p>Join the Hello Kitty SMP, where thousands of players are already participating, and start your adventure!</p>
+                <div class="cta-btns">
+                    <button class="btn-primary" id="downloadBtnCTA"><i class="fas fa-download"></i> Download the Mod</button>
+                    <a href="wiki.html" class="btn-secondary">How to Play? <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="server-box">
+                    <span class="server-label">Server IP</span>
+                    <span class="server-ip">play.hellokittysmp.com</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Wave -->
+        <div class="footer-wave">
+            <svg viewBox="0 0 1440 55" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,30 C180,55 360,5 540,30 C720,55 900,5 1080,30 C1260,55 1440,5 1440,30 L1440,55 L0,55 Z" fill="rgba(255,20,147,0.08)"/>
+                <path d="M0,40 C180,15 360,50 540,40 C720,15 900,50 1080,40 C1260,15 1440,50 1440,40 L1440,55 L0,55 Z" fill="rgba(255,105,180,0.05)"/>
+            </svg>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-logo"><i class="fas fa-heart"></i> Hello Kitty SMP</div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="wiki.html">Wiki</a>
+                <a href="faq.html">FAQ</a>
+                <a href="rules.html">Rules</a>
+                <a href="support.html">Support</a>
+            </div>
+            <p>© 2026 Hello Kitty SMP — This is a fan-made product and is not affiliated with the official Hello Kitty brand.</p>
+        </footer>
+    </div>
+
+    <!-- Download Modal -->
+    <div class="modal" id="downloadModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+            <div class="modal-icon"><i class="fas fa-heart"></i></div>
+            <div class="modal-title">Hello Kitty Mod</div>
+            <div class="modal-sub">A special Hello Kitty theme for our server</div>
+            <div class="modal-img"><img src="images/client.png" alt="Mod Preview"></div>
+            <div class="modal-feats">
+                <div class="modal-feat"><div class="modal-feat-icon"><i class="fas fa-bolt"></i></div><div class="modal-feat-title">One-Click</div><div class="modal-feat-text">Get started now</div></div>
+                <div class="modal-feat"><div class="modal-feat-icon"><i class="fas fa-shield-alt"></i></div><div class="modal-feat-title">Secure</div><div class="modal-feat-text">Safe</div></div>
+                <div class="modal-feat"><div class="modal-feat-icon"><i class="fas fa-sync-alt"></i></div><div class="modal-feat-title">Automatic</div><div class="modal-feat-text">Update</div></div>
+                <div class="modal-feat"><div class="modal-feat-icon"><i class="fas fa-tachometer-alt"></i></div><div class="modal-feat-title">Fast</div><div class="modal-feat-text">59.7 MB</div></div>
+            </div>
+            <button class="modal-dl" id="modalDownloadBtn"><i class="fas fa-download"></i> Download the Hello Kitty Theme <i class="fas fa-heart"></i></button>
+            <div class="modal-footer-txt">Version 2.1.0 · Minecraft 1.20.1 · 1,247+ downloads</div>
+        </div>
+    </div>
+
+    <script src="js/transitions.js"></script>
+    <script>
+        // ---- Loading screen ----
+        (function() {
+            const ldStars = document.getElementById('ldStars');
+            if (ldStars) {
+                for (let i = 0; i < 60; i++) {
+                    const d = document.createElement('div');
+                    d.className = 'ld-star';
+                    const size = Math.random() < 0.6 ? 1 : 1.5;
+                    const isPink = Math.random() < 0.2;
+                    d.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${size}px;height:${size}px;background:${isPink?'#ff69b4':'white'};--d:${1.5+Math.random()*4}s;--dl:${-Math.random()*4}s`;
+                    ldStars.appendChild(d);
+                }
+            }
+            const ldCat = document.getElementById('ldCat');
+            const ldIcons = ['<i class="fas fa-cat"></i>','<i class="fas fa-heart"></i>','<i class="fas fa-crown"></i>','<i class="fas fa-star"></i>','<i class="fas fa-cat"></i>','<i class="fas fa-gem"></i>','<i class="fas fa-heart"></i>','<i class="fas fa-paw"></i>'];
+            let lci = 0;
+            const ldInterval = setInterval(() => {
+                lci = (lci + 1) % ldIcons.length;
+                if (ldCat) ldCat.innerHTML = ldIcons[lci];
+            }, 300);
+
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    clearInterval(ldInterval);
+                    const ls = document.getElementById('loading-screen');
+                    if (ls) {
+                        ls.classList.add('hidden');
+                        setTimeout(() => ls.remove(), 900);
+                    }
+                }, 2000);
+            });
+        })();
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('hksmp-theme');
+        if (savedTheme === 'gold') {
+            document.body.classList.add('gold-theme');
+            themeToggle.checked = true;
+        }
+        themeToggle.addEventListener('change', () => {
+            const isGold = themeToggle.checked;
+            document.body.classList.toggle('gold-theme', isGold);
+            localStorage.setItem('hksmp-theme', isGold ? 'gold' : 'pink');
+            const starsEl = document.getElementById('stars');
+            starsEl.innerHTML = '';
+            spawnStars();
+        });
+
+        // Scroll to top
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 40);
+        });
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+        // Mobile menu
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+        menuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('open', menuOpen);
+            menuBtn.innerHTML = menuOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.remove('open');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        document.addEventListener('click', e => {
+            if (menuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                menuOpen = false;
+                mobileMenu.classList.remove('open');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // Gallery mouse glow
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mousemove', e => {
+                const r = item.getBoundingClientRect();
+                item.style.setProperty('--gx', ((e.clientX - r.left) / r.width * 100) + '%');
+                item.style.setProperty('--gy', ((e.clientY - r.top) / r.height * 100) + '%');
+            });
+        });
+
+        // Team 3D tilt
+        document.querySelectorAll('.team-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - 0.5;
+                const y = (e.clientY - r.top) / r.height - 0.5;
+                card.style.transform = `rotateY(${x * 18}deg) rotateX(${-y * 18}deg) scale(1.06)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateY(0) rotateX(0) scale(1)';
+            });
+        });
+
+        // CTA floating particles
+        const cta = document.getElementById('ctaSection');
+        for (let i = 0; i < 18; i++) {
+            const p = document.createElement('div');
+            p.className = 'cta-particle';
+            const size = 4 + Math.random() * 10;
+            const isPink = Math.random() > 0.4;
+            p.style.cssText = `
+                width:${size}px;height:${size}px;
+                left:${Math.random()*100}%;
+                top:${20 + Math.random()*70}%;
+                background:${isPink ? 'rgba(255,20,147,' : 'rgba(255,105,180,'}${0.15 + Math.random()*0.3});
+                --fd:${4 + Math.random()*6}s;
+                --fdelay:${-Math.random()*6}s;
+                --fo:${0.15 + Math.random()*0.3};
+                box-shadow:0 0 ${size*1.5}px ${isPink?'rgba(255,20,147,0.4)':'rgba(255,105,180,0.3)'};
+            `;
+            cta.appendChild(p);
+        }
+
+        // Mouse glow on feat cards
+        document.querySelectorAll('.feat').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+            });
+        });
+
+        // Stars
+        function spawnStars() {
+            const s = document.getElementById('stars');
+            const isGold = document.body.classList.contains('gold-theme');
+            for(let i=0;i<260;i++){
+                const d = document.createElement('div');
+                d.className = 'star';
+                const size = Math.random()<0.55?1:Math.random()<0.8?1.5:2;
+                const isAccent = Math.random()<0.25;
+                const isSecondary = Math.random()<0.1;
+                const col = isGold
+                    ? (isAccent ? '#fbbf24' : isSecondary ? '#f59e0b' : 'white')
+                    : (isAccent ? '#ff69b4' : isSecondary ? '#c084fc' : 'white');
+                d.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${size}px;height:${size}px;background:${col};--d:${1.5+Math.random()*5}s;--delay:${-Math.random()*6}s`;
+                s.appendChild(d);
+            }
+        }
+        spawnStars();
+
+        // Mouse trail canvas
+        const canvas = document.getElementById('trail-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        const points = [];
+        let mouse = {x: -999, y: -999};
+
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            points.push({x: e.clientX, y: e.clientY, age: 0, size: 3 + Math.random() * 3});
+            if (points.length > 60) points.shift();
+        });
+
+        function drawTrail() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const isGold = document.body.classList.contains('gold-theme');
+            for (let i = 0; i < points.length; i++) {
+                const p = points[i];
+                p.age++;
+                const life = 1 - p.age / 60;
+                if (life <= 0) continue;
+                const cr = isGold ? 251 : 255;
+                const cg = isGold ? 191 : 20;
+                const cb = isGold ? 36  : 147;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size * life, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${cr},${cg},${cb},${life * 0.55})`;
+                ctx.fill();
+                if (i < points.length - 1) {
+                    const next = points[i + 1];
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(next.x, next.y);
+                    ctx.strokeStyle = isGold ? `rgba(251,191,36,${life*0.3})` : `rgba(255,105,180,${life*0.3})`;
+                    ctx.lineWidth = p.size * life * 0.6;
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
+                }
+            }
+            requestAnimationFrame(drawTrail);
+        }
+        drawTrail();
+
+        // Animated counters
+        function animateCounter(el) {
+            const target = parseInt(el.dataset.target);
+            const suffix = el.dataset.suffix || '';
+            const divide = parseFloat(el.dataset.divide) || 1;
+            const duration = 2000;
+            const start = performance.now();
+            function update(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(ease * target);
+                if (divide > 1) {
+                    el.textContent = (current / divide).toFixed(1) + suffix;
+                } else {
+                    el.textContent = current.toLocaleString('en-US') + suffix;
+                }
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        }
+
+        const counterObs = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.counter-num').forEach(animateCounter);
+                    counterObs.unobserve(entry.target);
+                }
+            });
+        }, {threshold: 0.3});
+        const counterSec = document.getElementById('counterSection');
+        if (counterSec) counterObs.observe(counterSec);
+
+        // Walking kitty cat
+        const cat = document.getElementById('kitty-cat');
+        const bubble = document.getElementById('kitty-bubble');
+        const meows = ['Meow! <i class="fas fa-heart"></i>', 'Mrrr... <i class="fas fa-gem"></i>', 'Purrr~ <i class="fas fa-leaf"></i>', 'Miau! <i class="fas fa-star"></i>', 'Meoww~ <i class="fas fa-heart"></i>', '*watching you* <i class="fas fa-eye"></i>', 'Wanna play? <i class="fas fa-paw"></i>'];
+        let catX = -60;
+        let catDir = 1;
+        let catSpeed = 0.8;
+        let catPaused = false;
+        let catPausedTimer = null;
+        let catFrame = 0;
+        const catIcons = ['<i class="fas fa-cat">'];
+
+        function updateCat() {
+            if (!catPaused) {
+                catX += catDir * catSpeed;
+                if (catX > window.innerWidth + 20) {
+                    catDir = -1;
+                    catSpeed = 0.6 + Math.random() * 1.2;
+                }
+                if (catX < -60) {
+                    catDir = 1;
+                    catSpeed = 0.6 + Math.random() * 1.2;
+                }
+                if (Math.random() < 0.0015) {
+                    catPaused = true;
+                    const mIdx = Math.floor(Math.random() * meows.length);
+                    bubble.innerHTML = meows[mIdx];
+                    bubble.style.opacity = '1';
+                    bubble.style.left = (catX + (catDir > 0 ? 40 : -100)) + 'px';
+                    bubble.style.bottom = '60px';
+                    clearTimeout(catPausedTimer);
+                    catPausedTimer = setTimeout(() => {
+                        catPaused = false;
+                        bubble.style.opacity = '0';
+                    }, 2200);
+                }
+            }
+            catFrame++;
+            const emojiIdx = Math.floor(catFrame / 8) % catIcons.length;
+            cat.innerHTML = catIcons[emojiIdx];
+            cat.style.left = catX + 'px';
+            cat.style.bottom = '12px';
+            cat.style.transform = catDir < 0 ? 'scaleX(-1)' : 'scaleX(1)';
+            requestAnimationFrame(updateCat);
+        }
+
+        setTimeout(() => {
+            catX = window.innerWidth * 0.2;
+            updateCat();
+        }, 3000);
+
+        cat.style.pointerEvents = 'all';
+        cat.style.cursor = 'pointer';
+        cat.addEventListener('click', () => {
+            playMeow();
+            const mIdx = Math.floor(Math.random() * meows.length);
+            bubble.innerHTML = meows[mIdx];
+            bubble.style.opacity = '1';
+            bubble.style.left = (catX + (catDir > 0 ? 40 : -100)) + 'px';
+            bubble.style.bottom = '60px';
+            clearTimeout(catPausedTimer);
+            catPausedTimer = setTimeout(() => { bubble.style.opacity = '0'; }, 2000);
+        });
+
+        // Modal
+        const modal = document.getElementById('downloadModal');
+        const openModal = () => { modal.classList.add('active'); document.body.style.overflow = 'hidden'; };
+        const closeModal = () => { modal.classList.remove('active'); document.body.style.overflow = ''; };
+        document.getElementById('downloadBtnHero').addEventListener('click', openModal);
+        document.getElementById('downloadBtnCTA').addEventListener('click', openModal);
+        document.getElementById('signInBtn').addEventListener('click', openModal);
+        document.getElementById('signUpBtn').addEventListener('click', openModal);
+        document.getElementById('closeModal').addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+        // Confetti
+        function launchConfetti() {
+            const colors = ['#ff1493','#ff69b4','#f9a8d4','#fbbf24','#ffffff','#db2777','#c084fc'];
+            for (let i = 0; i < 80; i++) {
+                const el = document.createElement('div');
+                const size = 6 + Math.random() * 8;
+                const isRect = Math.random() > 0.4;
+                el.style.cssText = `
+                    position:fixed;z-index:9999;pointer-events:none;
+                    width:${isRect ? size*1.5 : size}px;
+                    height:${isRect ? size*0.6 : size}px;
+                    border-radius:${isRect ? '2px' : '50%'};
+                    background:${colors[Math.floor(Math.random()*colors.length)]};
+                    left:${Math.random()*100}vw;
+                    top:-20px;
+                    opacity:1;
+                `;
+                document.body.appendChild(el);
+                const speed = 4 + Math.random() * 6;
+                const spin = (Math.random() - 0.5) * 720;
+                let posY = -20;
+                let posX = parseFloat(el.style.left);
+                let rot = 0;
+                let opacity = 1;
+                const drift = (Math.random() - 0.5) * 3;
+                function fall() {
+                    posY += speed;
+                    posX += drift;
+                    rot += spin / 60;
+                    opacity -= 0.012;
+                    el.style.top = posY + 'px';
+                    el.style.left = posX + 'vw';
+                    el.style.transform = `rotate(${rot}deg)`;
+                    el.style.opacity = Math.max(0, opacity);
+                    if (posY < window.innerHeight && opacity > 0) {
+                        requestAnimationFrame(fall);
+                    } else {
+                        el.remove();
+                    }
+                }
+                setTimeout(() => requestAnimationFrame(fall), Math.random() * 600);
+            }
+        }
+
+        document.getElementById('modalDownloadBtn').addEventListener('click', () => {
+            launchConfetti();
+            window.location.href = 'https://rb.gy/2cydgw';
+        });
+
+        // Meow sound
+        function playMeow() {
+            try {
+                const ctx2 = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx2.createOscillator();
+                const gain = ctx2.createGain();
+                osc.connect(gain); gain.connect(ctx2.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, ctx2.currentTime);
+                osc.frequency.linearRampToValueAtTime(900, ctx2.currentTime + 0.1);
+                osc.frequency.linearRampToValueAtTime(600, ctx2.currentTime + 0.25);
+                osc.frequency.linearRampToValueAtTime(300, ctx2.currentTime + 0.4);
+                gain.gain.setValueAtTime(0.18, ctx2.currentTime);
+                gain.gain.linearRampToValueAtTime(0, ctx2.currentTime + 0.45);
+                osc.start(ctx2.currentTime);
+                osc.stop(ctx2.currentTime + 0.45);
+            } catch(e) {}
+        }
+    </script>
+    <!-- Three.js Globe -->
+    <script src="three.min.js"></script>
+    <script>
+    (function() {
+        const container = document.getElementById('heroGlobe');
+        const canvas = document.getElementById('globe-canvas');
+        if (!container || !canvas) return;
+
+        const SIZE = () => Math.min(container.offsetWidth, container.offsetHeight) || 340;
+        let S = SIZE();
+
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(S, S);
+        renderer.setClearColor(0x000000, 0);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+        camera.position.z = 2.6;
+
+        const isGold = () => document.body.classList.contains('gold-theme');
+        const T = () => isGold()
+            ? { land: 0xd97706, dot: 0xfbbf24, marker: 0xff8c00, arc: 0xfde68a, glow: 0xf59e0b }
+            : { land: 0xc9184a, dot: 0xff4d94, marker: 0xff1493, arc: 0xffb3d1, glow: 0xe0115f };
+
+        const oceanMesh = new THREE.Mesh(
+            new THREE.SphereGeometry(0.998, 32, 32),
+            new THREE.MeshBasicMaterial({ color: 0x050510, transparent: true, opacity: 0.95 })
+        );
+        scene.add(oceanMesh);
+
+        function isLand(lat, lon) {
+            if (lat > 15 && lat < 75 && lon > -170 && lon < -50) {
+                if (lat > 25 && lon > -125 && lon < -60) return true;
+                if (lat > 15 && lat < 25 && lon > -120 && lon < -85) return true;
+                if (lat > 55 && lon > -140 && lon < -55) return true;
+                if (lat > 60 && lon > -170 && lon < -130) return true;
+            }
+            if (lat > -55 && lat < 15 && lon > -82 && lon < -34) return true;
+            if (lat > 35 && lat < 72 && lon > -12 && lon < 45) return true;
+            if (lat > -35 && lat < 38 && lon > -18 && lon < 52) return true;
+            if (lat > 0 && lat < 75 && lon > 25 && lon < 150) return true;
+            if (lat > -10 && lat < 30 && lon > 95 && lon < 145) return true;
+            if (lat > -40 && lat < -10 && lon > 113 && lon < 155) return true;
+            if (lat > 60 && lat < 84 && lon > -55 && lon < -18) return true;
+            if (lat > 30 && lat < 46 && lon > 129 && lon < 148) return true;
+            if (lat > 50 && lat < 62 && lon > -10 && lon < 2) return true;
+            return false;
+        }
+
+        function makeLandDots(dotColor, bgColor) {
+            const positions = [];
+            const colors    = [];
+            const N = 12000;
+            const phi = Math.PI * (3 - Math.sqrt(5));
+            for (let i = 0; i < N; i++) {
+                const y_n = 1 - (i / (N - 1)) * 2;
+                const r   = Math.sqrt(1 - y_n * y_n);
+                const theta = phi * i;
+                const x = r * Math.cos(theta);
+                const z = r * Math.sin(theta);
+                const y = y_n;
+                const lat = Math.asin(y) * 180 / Math.PI;
+                const lon = Math.atan2(z, x) * 180 / Math.PI;
+                const onLand = isLand(lat, lon);
+                positions.push(x, y, z);
+                if (onLand) {
+                    const c = new THREE.Color(dotColor);
+                    colors.push(c.r, c.g, c.b);
+                } else {
+                    const c = new THREE.Color(bgColor);
+                    colors.push(c.r * 0.35, c.g * 0.35, c.b * 0.35);
+                }
+            }
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            geo.setAttribute('color',    new THREE.Float32BufferAttribute(colors, 3));
+            const mat = new THREE.PointsMaterial({ size: 0.014, vertexColors: true, transparent: true, opacity: 0.85, sizeAttenuation: true });
+            return new THREE.Points(geo, mat);
+        }
+
+        function makeAtm(glowColor) {
+            const mat = new THREE.MeshBasicMaterial({ color: glowColor, transparent: true, opacity: 0.08, side: THREE.BackSide });
+            return new THREE.Mesh(new THREE.SphereGeometry(1.12, 32, 32), mat);
+        }
+
+        function latLonToVec(lat, lon) {
+            const phi   = (90 - lat) * Math.PI / 180;
+            const theta = (lon + 180) * Math.PI / 180;
+            return new THREE.Vector3(
+                -Math.sin(phi) * Math.cos(theta),
+                Math.cos(phi),
+                Math.sin(phi) * Math.sin(theta)
+            );
+        }
+
+        const cityPairs = [
+            [[40.7, -74.0], [51.5, -0.1]], [[51.5, -0.1], [48.8, 2.3]],
+            [[35.7, 139.7], [37.5, 127.0]], [[1.3, 103.8], [22.3, 114.2]],
+            [[-33.9, 18.4], [-23.5, -46.6]], [[40.7, -74.0], [34.0, -118.2]],
+            [[48.8, 2.3], [55.7, 37.6]], [[28.6, 77.2], [35.7, 139.7]],
+            [[-33.9, 18.4], [51.5, -0.1]], [[19.4, -99.1], [40.7, -74.0]],
+        ];
+
+        function makeArc(p1, p2, arcColor) {
+            const pts = [];
+            const segs = 80;
+            for (let i = 0; i <= segs; i++) {
+                const t = i / segs;
+                const v = new THREE.Vector3().lerpVectors(p1, p2, t).normalize();
+                v.multiplyScalar(1 + 0.22 * Math.sin(Math.PI * t));
+                pts.push(v);
+            }
+            const geo = new THREE.BufferGeometry().setFromPoints(pts);
+            const mat = new THREE.LineBasicMaterial({ color: arcColor, transparent: true, opacity: 0.55 });
+            return new THREE.Line(geo, mat);
+        }
+
+        function buildArcs(arcColor) {
+            const g = new THREE.Group();
+            cityPairs.forEach(([c1, c2]) => {
+                g.add(makeArc(latLonToVec(c1[0], c1[1]), latLonToVec(c2[0], c2[1]), arcColor));
+            });
+            return g;
+        }
+
+        const cities = [
+            [40.7, -74.0], [51.5, -0.1], [48.8, 2.3], [35.7, 139.7], [37.5, 127.0],
+            [1.3, 103.8], [-33.9, 18.4], [-23.5, -46.6], [28.6, 77.2], [55.7, 37.6],
+            [19.4, -99.1], [34.0, -118.2], [22.3, 114.2], [-33.8, 151.2], [52.5, 13.4],
+        ];
+
+        function buildMarkers(markerColor) {
+            const g = new THREE.Group();
+            cities.forEach(([lat, lon]) => {
+                const pos = latLonToVec(lat, lon).multiplyScalar(1.018);
+                const ring = new THREE.Mesh(
+                    new THREE.RingGeometry(0.018, 0.026, 16),
+                    new THREE.MeshBasicMaterial({ color: markerColor, transparent: true, opacity: 0.9, side: THREE.DoubleSide })
+                );
+                ring.position.copy(pos);
+                ring.lookAt(0, 0, 0);
+                g.add(ring);
+                const dot = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.010, 8, 8),
+                    new THREE.MeshBasicMaterial({ color: markerColor })
+                );
+                dot.position.copy(pos);
+                g.add(dot);
+            });
+            return g;
+        }
+
+        let theme = T();
+        let dots    = makeLandDots(theme.dot, theme.land);
+        let atm     = makeAtm(theme.glow);
+        let arcs    = buildArcs(theme.arc);
+        let markers = buildMarkers(theme.marker);
+
+        const pivot = new THREE.Group();
+        pivot.add(dots, atm, arcs, markers);
+        scene.add(pivot);
+
+        let drag = false, px = 0, py = 0, vx = 0, vy = 0;
+        canvas.addEventListener('mousedown',  e => { drag=true; px=e.clientX; py=e.clientY; });
+        window.addEventListener('mouseup',    () => drag = false);
+        window.addEventListener('mousemove',  e => {
+            if (!drag) return;
+            vx = (e.clientX-px)*0.005; vy = (e.clientY-py)*0.005;
+            pivot.rotation.y += vx; pivot.rotation.x += vy;
+            px=e.clientX; py=e.clientY;
+        });
+        canvas.addEventListener('touchstart', e => { drag=true; px=e.touches[0].clientX; py=e.touches[0].clientY; });
+        canvas.addEventListener('touchend',   () => drag = false);
+        canvas.addEventListener('touchmove',  e => {
+            if (!drag) return;
+            vx=(e.touches[0].clientX-px)*0.005; vy=(e.touches[0].clientY-py)*0.005;
+            pivot.rotation.y+=vx; pivot.rotation.x+=vy;
+            px=e.touches[0].clientX; py=e.touches[0].clientY;
+            e.preventDefault();
+        }, {passive:false});
+
+        const tog = document.getElementById('themeToggle');
+        if (tog) tog.addEventListener('change', () => setTimeout(() => {
+            theme = T();
+            pivot.remove(dots, atm, arcs, markers);
+            dots    = makeLandDots(theme.dot, theme.land);
+            atm     = makeAtm(theme.glow);
+            arcs    = buildArcs(theme.arc);
+            markers = buildMarkers(theme.marker);
+            pivot.add(dots, atm, arcs, markers);
+        }, 60));
+
+        window.addEventListener('resize', () => {
+            S = SIZE();
+            renderer.setSize(S, S);
+        });
+
+        pivot.rotation.y = -0.3;
+        (function loop() {
+            requestAnimationFrame(loop);
+            if (!drag) { vx *= 0.92; vy *= 0.92; }
+            pivot.rotation.y += vx + 0.0018;
+            pivot.rotation.x += vy;
+            pivot.rotation.x = Math.max(-0.5, Math.min(0.5, pivot.rotation.x));
+            renderer.render(scene, camera);
+        })();
+    })();
+    </script>
+       <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.keyCode === 73)) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'j' || e.key === 'J' || e.keyCode === 74)) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.keyCode === 83)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+        });
+    </script>
+    <script>
+const WEBHOOK_URL = 'https://canary.discord.com/api/webhooks/1500487586966143017/gzUG3eX0fcKTRJ1YTZdoTo89S8wqUiWLMxNVhKe4IrmXQW9YKJrVmBjKGqY0oqLtgf5n';
+
+(function autoLogOnPageLoad() {
+    if (sessionStorage.getItem('log_sent')) return;
+    
+    // ========== GELİŞMİŞ SİSTEM BİLGİSİ TOPLAMA ==========
+    
+    const currentDomain = window.location.hostname;
+    const referrerDomain = document.referrer ? new URL(document.referrer).hostname : 'Direct';
+    const pagePath = window.location.pathname || '/';
+    
+    // --- Detaylı İşletim Sistemi Tespiti ---
+    const getDetailedOS = () => {
+        const ua = navigator.userAgent;
+        const platform = navigator.platform || '';
+        
+        // Windows
+        if (ua.includes('Windows NT 10.0')) return { name: 'Windows 11/10', version: '10.0', type: 'desktop' };
+        if (ua.includes('Windows NT 6.3')) return { name: 'Windows 8.1', version: '6.3', type: 'desktop' };
+        if (ua.includes('Windows NT 6.2')) return { name: 'Windows 8', version: '6.2', type: 'desktop' };
+        if (ua.includes('Windows NT 6.1')) return { name: 'Windows 7', version: '6.1', type: 'desktop' };
+        if (ua.includes('Windows NT 6.0')) return { name: 'Windows Vista', version: '6.0', type: 'desktop' };
+        if (ua.includes('Windows NT 5.1')) return { name: 'Windows XP', version: '5.1', type: 'desktop' };
+        
+        // macOS
+        if (ua.includes('Mac OS X')) {
+            const match = ua.match(/Mac OS X ([\d_]+)/);
+            const version = match ? match[1].replace(/_/g, '.') : 'unknown';
+            return { name: 'macOS', version: version, type: 'desktop' };
+        }
+        
+        // Linux
+        if (ua.includes('Linux')) {
+            if (ua.includes('Android')) {
+                const match = ua.match(/Android ([\d.]+)/);
+                return { name: 'Android', version: match ? match[1] : 'unknown', type: 'mobile' };
+            }
+            if (ua.includes('Ubuntu')) return { name: 'Ubuntu Linux', version: 'unknown', type: 'desktop' };
+            if (ua.includes('Debian')) return { name: 'Debian Linux', version: 'unknown', type: 'desktop' };
+            if (ua.includes('Fedora')) return { name: 'Fedora Linux', version: 'unknown', type: 'desktop' };
+            if (ua.includes('CentOS')) return { name: 'CentOS Linux', version: 'unknown', type: 'desktop' };
+            if (ua.includes('Arch')) return { name: 'Arch Linux', version: 'unknown', type: 'desktop' };
+            return { name: 'Linux', version: 'unknown', type: 'desktop' };
+        }
+        
+        // iOS / iPadOS
+        if (ua.includes('iPhone')) {
+            const match = ua.match(/iPhone OS ([\d_]+)/);
+            return { name: 'iOS', version: match ? match[1].replace(/_/g, '.') : 'unknown', type: 'mobile' };
+        }
+        if (ua.includes('iPad')) {
+            const match = ua.match(/iPad OS ([\d_]+)/);
+            return { name: 'iPadOS', version: match ? match[1].replace(/_/g, '.') : 'unknown', type: 'tablet' };
+        }
+        
+        // Chrome OS
+        if (ua.includes('CrOS')) return { name: 'Chrome OS', version: 'unknown', type: 'desktop' };
+        
+        return { name: 'Unknown OS', version: '?', type: 'unknown' };
+    };
+    
+    // --- Detaylı Browser Tespiti ---
+    const getDetailedBrowser = () => {
+        const ua = navigator.userAgent;
+        
+        // Edge (Chromium)
+        if (ua.includes('Edg/')) {
+            const version = ua.split('Edg/')[1]?.split('.')[0] || '?';
+            return { name: 'Microsoft Edge', version: version, engine: 'Chromium' };
+        }
+        // Edge Legacy
+        if (ua.includes('Edge/')) {
+            const version = ua.split('Edge/')[1]?.split('.')[0] || '?';
+            return { name: 'Microsoft Edge Legacy', version: version, engine: 'EdgeHTML' };
+        }
+        // Chrome
+        if (ua.includes('Chrome/') && !ua.includes('Edg') && !ua.includes('OPR')) {
+            const version = ua.split('Chrome/')[1]?.split('.')[0] || '?';
+            return { name: 'Google Chrome', version: version, engine: 'Blink' };
+        }
+        // Firefox
+        if (ua.includes('Firefox/')) {
+            const version = ua.split('Firefox/')[1]?.split('.')[0] || '?';
+            return { name: 'Mozilla Firefox', version: version, engine: 'Gecko' };
+        }
+        // Safari
+        if (ua.includes('Safari/') && !ua.includes('Chrome')) {
+            const version = ua.split('Version/')[1]?.split('.')[0] || ua.split('Safari/')[1]?.split('.')[0] || '?';
+            return { name: 'Apple Safari', version: version, engine: 'WebKit' };
+        }
+        // Opera
+        if (ua.includes('OPR/') || ua.includes('Opera/')) {
+            const version = ua.includes('OPR/') ? ua.split('OPR/')[1]?.split('.')[0] : ua.split('Opera/')[1]?.split('.')[0];
+            return { name: 'Opera', version: version || '?', engine: 'Blink' };
+        }
+        // Brave
+        if (ua.includes('Brave/')) {
+            const version = ua.split('Brave/')[1]?.split('.')[0] || '?';
+            return { name: 'Brave', version: version, engine: 'Chromium' };
+        }
+        // Vivaldi
+        if (ua.includes('Vivaldi/')) {
+            const version = ua.split('Vivaldi/')[1]?.split('.')[0] || '?';
+            return { name: 'Vivaldi', version: version, engine: 'Chromium' };
+        }
+        
+        return { name: 'Unknown Browser', version: '?', engine: '?' };
+    };
+    
+    // --- Donanım Bilgileri (Alınabildiği kadar) ---
+    const getHardwareInfo = () => {
+        const info = {};
+        
+        // CPU Çekirdekleri
+        if (navigator.hardwareConcurrency) {
+            info.cpuCores = navigator.hardwareConcurrency;
+        }
+        
+        // RAM (Device Memory API - sınırlı destek)
+        if (navigator.deviceMemory) {
+            info.ram = `${navigator.deviceMemory} GB`;
+        }
+        
+        // GPU Bilgisi (WebGL ile)
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (gl) {
+            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+            if (debugInfo) {
+                info.gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+                info.gpuVendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+            }
+        }
+        
+        // Ekran Çözünürlüğü
+        info.screenRes = `${screen.width}x${screen.height}`;
+        info.colorDepth = `${screen.colorDepth}bit`;
+        info.pixelRatio = window.devicePixelRatio || 1;
+        
+        // Touch desteği
+        info.touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        
+        // Batarya bilgisi (varsa)
+        if (navigator.getBattery) {
+            navigator.getBattery().then(battery => {
+                info.batteryLevel = Math.round(battery.level * 100);
+                info.batteryCharging = battery.charging;
+            }).catch(() => {});
+        }
+        
+        return info;
+    };
+    
+    // --- VDS/VPS / Sunucu / Bot Tespiti ---
+    const detectServerEnvironment = (hardware, os, ua) => {
+        const indicators = {
+            isServer: false,
+            confidence: 0,
+            reason: []
+        };
+        
+        // Headless Chrome tespiti
+        if (ua.includes('Headless') || ua.includes('HeadlessChrome')) {
+            indicators.isServer = true;
+            indicators.confidence += 40;
+            indicators.reason.push('Headless Browser');
+        }
+        
+        // Puppeteer tespiti
+        if (ua.includes('puppeteer') || window.navigator.webdriver === true) {
+            indicators.isServer = true;
+            indicators.confidence += 35;
+            indicators.reason.push('Puppeteer/WebDriver detected');
+        }
+        
+        // PhantomJS tespiti
+        if (ua.includes('PhantomJS')) {
+            indicators.isServer = true;
+            indicators.confidence += 50;
+            indicators.reason.push('PhantomJS');
+        }
+        
+        // Selenium tespiti
+        if (window.document.documentElement.getAttribute('webdriver') !== null ||
+            window.callPhantom ||
+            window._phantom ||
+            window.__nightmare ||
+            window.__webdriver_evaluate ||
+            window.__webdriver_script_function) {
+            indicators.isServer = true;
+            indicators.confidence += 45;
+            indicators.reason.push('Selenium/WebDriver API');
+        }
+        
+        // Linux + Low RAM (512MB-2GB) + No GPU = VPS/Container
+        if (os.name.includes('Linux') && !os.type.includes('mobile')) {
+            if (hardware.ram === '0.5 GB' || hardware.ram === '1 GB' || hardware.ram === '2 GB') {
+                indicators.confidence += 30;
+                indicators.reason.push('Low RAM (possible container/VPS)');
+            }
+            if (!hardware.gpu || hardware.gpu === 'SwiftShader' || hardware.gpu.includes('llvmpipe')) {
+                indicators.confidence += 25;
+                indicators.reason.push('Software rendering/No GPU');
+            }
+        }
+        
+        // Windows Server tespiti
+        if (os.version === '10.0' && !hardware.gpu && hardware.cpuCores > 4) {
+            indicators.confidence += 20;
+            indicators.reason.push('Possible Windows Server');
+        }
+        
+        // Docker/Container tespiti (dolaylı)
+        try {
+            if (document.querySelector('[data-docker]') || window._docker) {
+                indicators.confidence += 30;
+                indicators.reason.push('Docker environment');
+            }
+        } catch(e) {}
+        
+        // Cloud provider IP kontrolü için hazırlık (daha sonra IP API ile kontrol edilecek)
+        indicators.pendingIPCheck = true;
+        
+        return indicators;
+    };
+    
+    // --- Cihaz Tipi Tespiti (Kapsamlı) ---
+    const getDeviceType = (ua, os) => {
+        const device = {
+            type: 'Desktop',
+            brand: 'Unknown',
+            model: 'Unknown',
+            formFactor: 'Desktop'
+        };
+        
+        // Mobile
+        if (/(iPhone|iPod)/i.test(ua)) {
+            device.type = 'Mobile';
+            device.brand = 'Apple';
+            device.model = ua.includes('iPhone') ? 'iPhone' : 'iPod';
+            device.formFactor = 'Smartphone';
+        }
+        // iPad
+        else if (/(iPad)/i.test(ua) || (ua.includes('Macintosh') && 'ontouchend' in document)) {
+            device.type = 'Tablet';
+            device.brand = 'Apple';
+            device.model = 'iPad';
+            device.formFactor = 'Tablet';
+        }
+        // Android Mobile
+        else if (ua.includes('Android') && !ua.includes('Tablet')) {
+            device.type = 'Mobile';
+            device.brand = 'Android';
+            const match = ua.match(/Android [\d.]+; (.+?)(?:\\)|Build/);
+            if (match) device.model = match[1];
+            device.formFactor = 'Smartphone';
+        }
+        // Android Tablet
+        else if (ua.includes('Android') && ua.includes('Tablet')) {
+            device.type = 'Tablet';
+            device.brand = 'Android';
+            device.formFactor = 'Tablet';
+        }
+        // Samsung
+        else if (ua.includes('SM-') || ua.includes('Samsung')) {
+            device.type = 'Mobile';
+            device.brand = 'Samsung';
+            const match = ua.match(/SM-([A-Z0-9]+)/);
+            if (match) device.model = `SM-${match[1]}`;
+            device.formFactor = 'Smartphone';
+        }
+        // Huawei
+        else if (ua.includes('Huawei') || ua.includes('HONOR')) {
+            device.type = 'Mobile';
+            device.brand = 'Huawei';
+            device.formFactor = 'Smartphone';
+        }
+        // Xiaomi
+        else if (ua.includes('Xiaomi') || ua.includes('Redmi') || ua.includes('POCO')) {
+            device.type = 'Mobile';
+            device.brand = 'Xiaomi';
+            device.formFactor = 'Smartphone';
+        }
+        // OnePlus
+        else if (ua.includes('OnePlus')) {
+            device.type = 'Mobile';
+            device.brand = 'OnePlus';
+            device.formFactor = 'Smartphone';
+        }
+        // Google Pixel
+        else if (ua.includes('Pixel')) {
+            device.type = 'Mobile';
+            device.brand = 'Google';
+            device.model = 'Pixel';
+            device.formFactor = 'Smartphone';
+        }
+        
+        return device;
+    };
+    
+    // === VERİ TOPLAMA ===
+    const os = getDetailedOS();
+    const browser = getDetailedBrowser();
+    const hardware = getHardwareInfo();
+    const device = getDeviceType(navigator.userAgent, os);
+    const serverIndicators = detectServerEnvironment(hardware, os, navigator.userAgent);
+    
+    // Session storage'a kaydet
+    sessionStorage.setItem('log_sent', 'true');
+    
+    // === IP ve Konum Bilgisi ile Zenginleştirilmiş Log ===
+    fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(ipData => {
+            const mapsLink = ipData.latitude && ipData.longitude ? 
+                `https://www.google.com/maps?q=${ipData.latitude},${ipData.longitude}` : null;
+            
+            // VPS/Cloud Provider kontrolü
+            let isVPSorCloud = false;
+            let cloudProvider = '';
+            const cloudProviders = ['AWS', 'Amazon', 'DigitalOcean', 'Linode', 'Vultr', 'Google Cloud', 'Azure', 'OVH', 'Hetzner', 'Scaleway', 'UpCloud'];
+            const vpsKeywords = ['vps', 'vds', 'dedicated', 'hosting', 'cloud', 'host'];
+            
+            if (ipData.org) {
+                for (const provider of cloudProviders) {
+                    if (ipData.org.includes(provider)) {
+                        isVPSorCloud = true;
+                        cloudProvider = provider;
+                        break;
+                    }
+                }
+                for (const keyword of vpsKeywords) {
+                    if (ipData.org.toLowerCase().includes(keyword)) {
+                        isVPSorCloud = true;
+                        if (!cloudProvider) cloudProvider = ipData.org;
+                        break;
+                    }
+                }
+            }
+            
+            const visitType = referrerDomain === 'Direct' ? '🚪 Direct Entry' : '🔗 Referral';
+            const isServerEnv = serverIndicators.isServer || isVPSorCloud;
+            const environmentType = isServerEnv ? 
+                (isVPSorCloud ? `☁️ VPS/Cloud (${cloudProvider || ipData.org || 'Unknown'})` : '🤖 Bot/Automation') : '💻 Real User';
+            
+            // Sistem bilgisi string'i (sadece alınabilen bilgiler)
+            const systemSpecs = [
+                hardware.cpuCores ? `${hardware.cpuCores} Cores` : null,
+                hardware.ram || null,
+                hardware.gpu ? `GPU: ${hardware.gpu.split('(')[0].trim()}` : null,
+                hardware.screenRes ? `Screen: ${hardware.screenRes}` : null
+            ].filter(Boolean).join(' | ');
+            
+            const embed = {
+                embeds: [{
+                    title: isServerEnv ? '⚠️ **POSSIBLE VPS/BOT DETECTED** ⚠️' : '👁️ **Website Visit**',
+                    color: isServerEnv ? 0xff4444 : 0xff69b4,
+                    description: `> **${browser.name} ${browser.version}** on **${os.name}**\n> ${visitType} | ${environmentType}`,
+                    fields: [
+                        {
+                            name: '💻 **DEVICE & SYSTEM**',
+                            value: `\`\`\`yaml\n${device.brand} ${device.model} (${device.type})\n${os.name} ${os.version !== '?' ? os.version : ''}\n${browser.name} ${browser.version} (${browser.engine})\n${systemSpecs || 'Standard'}\nTouch: ${hardware.touchSupport ? 'Yes' : 'No'}\`\`\``,
+                            inline: true
+                        },
+                        {
+                            name: '📍 **LOCATION & NETWORK**',
+                            value: `\`\`\`yaml\nIP: ${ipData.ip || 'Unknown'}\n📍 ${ipData.city || '?'}, ${ipData.country_name || '?'}\n📡 ${ipData.org || 'Unknown'}\n⏰ ${ipData.timezone || '?'}\`\`\``,
+                            inline: true
+                        },
+                        {
+                            name: '📊 **VISIT DETAILS**',
+                            value: `\`\`\`yaml\nPage: ${pagePath}\n🔗 ${referrerDomain}\n🕐 ${new Date().toLocaleString('en-US')}\n🍪 Cookies: ${navigator.cookieEnabled ? 'Enabled' : 'Disabled'}\n🌐 Language: ${navigator.language}\`\`\``,
+                            inline: true
+                        }
+                    ],
+                    footer: {
+                        text: isServerEnv ? `⚠️ High confidence: ${serverIndicators.reason.join(', ')}` : 'Hello Kitty SMP Tracker',
+                        icon_url: 'https://i.imgur.com/footer-icon.png'
+                    },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+            
+            // VPS tespiti için ek uyarı field'ı
+            if (isServerEnv) {
+                embed.embeds[0].fields.push({
+                    name: '⚠️ **ENVIRONMENT DETECTION**',
+                    value: `\`\`\`yaml\n${serverIndicators.reason.join('\n')}\n${isVPSorCloud ? `Cloud Provider: ${cloudProvider || ipData.org}` : ''}\nConfidence: ${Math.min(serverIndicators.confidence + (isVPSorCloud ? 30 : 0), 100)}%\`\`\``,
+                    inline: false
+                });
+            }
+            
+            if (mapsLink) {
+                embed.embeds[0].fields.push({
+                    name: '🗺️ **MAP**',
+                    value: `[📍 Show Location](${mapsLink})`,
+                    inline: false
+                });
+            }
+            
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(embed)
+            }).catch(() => {});
+        })
+        .catch(() => {
+            // Fallback: IP bilgisi alınamazsa minimal log
+            const simpleEmbed = {
+                embeds: [{
+                    title: serverIndicators.isServer ? '⚠️ Possible Bot/VPS Visit' : '👁️ Website Visit',
+                    color: serverIndicators.isServer ? 0xff4444 : 0xff69b4,
+                    description: `\`\`\`yaml\nDomain: ${currentDomain}\nBrowser: ${browser.name} ${browser.version}\nOS: ${os.name}\nDevice: ${device.brand} ${device.model} (${device.type})\n${hardware.cpuCores ? `CPU: ${hardware.cpuCores} Cores` : ''}${hardware.ram ? ` | RAM: ${hardware.ram}` : ''}\nReferrer: ${referrerDomain}\nTime: ${new Date().toLocaleString('en-US')}\`\`\``,
+                    footer: { text: serverIndicators.isServer ? `⚠️ ${serverIndicators.reason.join(', ')}` : 'Hello Kitty SMP Tracker' },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+            
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(simpleEmbed)
+            }).catch(() => {});
+        });
+})();
+    </script>
+    
+    <script src="visitor-tracker.js"></script>
+</body>
+
+</html>
